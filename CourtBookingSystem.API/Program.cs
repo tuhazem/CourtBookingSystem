@@ -37,7 +37,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-// عمل Mapping للـ Controllers (بدل الـ Minimal APIs بتاعة الـ Weather)
 app.MapControllers();
 
 app.Run();
