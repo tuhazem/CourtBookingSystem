@@ -1,0 +1,6 @@
+@CourtBookingSystem.API_HostAddress = http://localhost:5254
+
+GET {{CourtBookingSystem.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
