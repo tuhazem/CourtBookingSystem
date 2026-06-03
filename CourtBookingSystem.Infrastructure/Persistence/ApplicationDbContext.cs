@@ -1,5 +1,7 @@
-﻿using CourtBookingSystem.Domain.Entities;
+﻿using CourtBookingSystem.Application.Common.Interfaces;
+using CourtBookingSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CourtBookingSystem.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {}

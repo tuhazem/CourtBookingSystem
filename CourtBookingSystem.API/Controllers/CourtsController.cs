@@ -1,0 +1,65 @@
+﻿using CourtBookingSystem.Application.Courts.Commands;
+using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CourtBookingSystem.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CourtsController : ControllerBase
+    {
+        private readonly IMediator mediator;
+
+        public CourtsController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateCourtCommand command)
+        {
+            try
+            {
+                var courtId = await mediator.Send(command);
+                return Ok(new { Message = "Court created successfully.", CourtId = courtId });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPut("Update-price")]
+        public async Task<IActionResult> UpdatePrice([FromBody] UpdateCourtPriceCommand command)
+        {
+            var result = await mediator.Send(command);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return Ok(new { Message = "Price Updated Successfully" });
+        }
+
+        [HttpPut("Toggle-status")]
+        public async Task<IActionResult> ToggleStatus([FromBody] ToggleCourtStatusCommand command)
+        {
+            try
+            {
+                var result = await mediator.Send(command);
+                if (!result)
+                {
+                    return NotFound();
+                }
+                return Ok(new { Message = "Court Status Updated Successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
+        }
+    }
+}
