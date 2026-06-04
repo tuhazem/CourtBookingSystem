@@ -19,15 +19,10 @@ namespace CourtBookingSystem.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCourtCommand command)
         {
-            try
-            {
+            
                 var courtId = await mediator.Send(command);
                 return Ok(new { Message = "Court created successfully.", CourtId = courtId });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            
         }
 
 
@@ -45,20 +40,12 @@ namespace CourtBookingSystem.API.Controllers
         [HttpPut("Toggle-status")]
         public async Task<IActionResult> ToggleStatus([FromBody] ToggleCourtStatusCommand command)
         {
-            try
+            var result = await mediator.Send(command);
+            if (!result)
             {
-                var result = await mediator.Send(command);
-                if (!result)
-                {
-                    return NotFound();
-                }
-                return Ok(new { Message = "Court Status Updated Successfully" });
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
+            return Ok(new { Message = "Court Status Updated Successfully" });
 
         }
     }

@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // =========================================================================
 // 1. SERVICES CONFIGURATION (Dependency Injection)
+builder.Services.AddScoped<ISmsService, FakeSmsService>();
 // =========================================================================
 
 builder.Services.AddControllers();
@@ -30,6 +31,7 @@ var app = builder.Build();
 
 // =========================================================================
 // 2. MIDDLEWARES PIPELINE (HTTP Request Pipeline)
+app.UseMiddleware<CourtBookingSystem.API.Middleware.ExceptionHandlingMiddleware>();
 // =========================================================================
 
 if (app.Environment.IsDevelopment())

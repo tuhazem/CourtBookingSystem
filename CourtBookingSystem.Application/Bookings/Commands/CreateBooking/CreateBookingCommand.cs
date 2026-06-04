@@ -24,12 +24,13 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
     {
         private readonly IApplicationDbContext context;
 
-        public CreateBookingCommandHandler(IApplicationDbContext context)
+        public CreateBookingCommandHandler(IApplicationDbContext context , ISmsService smsService)
         {
             this.context = context;
+            SmsService = smsService;
         }
 
-
+        public ISmsService SmsService { get; }
 
         public async Task<Guid> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
         {
@@ -91,6 +92,10 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
                 await context.SaveChangesAsync(cancellationToken);
 
                 await transaction.CommitAsync(cancellationToken);
+                await SmsService.SendSmsAsync(
+                    booking.CustomerPhone,
+                    $"Hello Captain {booking.CustomerName}! Your court booking is confirmed for {booking.BookingDate:yyyy-MM-dd} at {DateTime.Today.Add(booking.StartTime):hh:mm tt}. Are you ready?"
+                );
                 return booking.Id;
 
 

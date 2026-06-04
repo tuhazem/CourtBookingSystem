@@ -20,32 +20,18 @@ namespace CourtBookingSystem.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateBookingCommand command)
         {
-            try
-            {
-
                 var bookingId = await mediatR.Send(command);
                 return Ok(new { Message = "Booking created successfully.", BookingId = bookingId });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
         }
 
         [HttpGet("available-slots")]
         public async Task<IActionResult> GetAvailableSlots([FromQuery] int courtId, [FromQuery] DateTime date)
         {
-            try
-            {
+            
                 var query = new GetAvailableSlotsQuery(courtId, date);
                 var result = await mediatR.Send(query);
                 return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { Error = ex.Message });
-            }
+          
         }
 
 
