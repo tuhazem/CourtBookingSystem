@@ -1,4 +1,5 @@
 ﻿using CourtBookingSystem.Application.Courts.Commands;
+using CourtBookingSystem.Application.Courts.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,10 @@ namespace CourtBookingSystem.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCourtCommand command)
         {
-            
-                var courtId = await mediator.Send(command);
-                return Ok(new { Message = "Court created successfully.", CourtId = courtId });
-            
+
+            var courtId = await mediator.Send(command);
+            return Ok(new { Message = "Court created successfully.", CourtId = courtId });
+
         }
 
 
@@ -47,6 +48,14 @@ namespace CourtBookingSystem.API.Controllers
             }
             return Ok(new { Message = "Court Status Updated Successfully" });
 
+        }
+
+
+        [HttpGet("admin/courts/{courtId}/performance")]
+        public async Task<IActionResult> GetCourtPerformance([FromRoute] int courtId)
+        {
+            var matrics = await mediator.Send(new GetCourtPerformanceQuery(courtId));
+            return Ok(matrics);
         }
     }
 }

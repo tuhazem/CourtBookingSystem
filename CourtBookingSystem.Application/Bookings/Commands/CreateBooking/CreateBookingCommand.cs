@@ -2,6 +2,7 @@
 using CourtBookingSystem.Domain.Entities;
 using CourtBookingSystem.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,14 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
     public class CreateBookingCommandHandler : IRequestHandler<CreateBookingCommand, Guid>
     {
         private readonly IApplicationDbContext context;
+        private readonly ISignalRService signalRService;
 
-        public CreateBookingCommandHandler(IApplicationDbContext context , ISmsService smsService)
+        public CreateBookingCommandHandler(IApplicationDbContext context , ISmsService smsService , 
+            ISignalRService signalRService)
         {
             this.context = context;
             SmsService = smsService;
+            this.signalRService = signalRService;
         }
 
         public ISmsService SmsService { get; }
@@ -85,7 +89,7 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
                     EndTime = request.EndTime,
                     TotalPrice = totalPrice,
                     DepositPaid = deposit,
-                    Status = BookingStatus.Pending // Default status when creating a booking, can be updated later based on payment or other conditions
+                    Status = BookingStatus.Confirmed // Default status when creating a booking, can be updated later based on payment or other conditions
                 };
 
                 await context.Bookings.AddAsync(booking, cancellationToken);
@@ -96,6 +100,14 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
                     booking.CustomerPhone,
                     $"Hello Captain {booking.CustomerName}! Your court booking is confirmed for {booking.BookingDate:yyyy-MM-dd} at {DateTime.Today.Add(booking.StartTime):hh:mm tt}. Are you ready?"
                 );
+
+                var startDateTime = DateTime.Today.Add(booking.StartTime);
+                var endDateTime = DateTime.Today.Add(booking.EndTime);
+                var label = $"{startDateTime:hh:mm tt} - {endDateTime:hh:mm tt}";
+
+                
+                await signalRService.NotifySlotReservedAsync(booking.CourtId , label);
+
                 return booking.Id;
 
 

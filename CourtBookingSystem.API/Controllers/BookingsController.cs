@@ -1,5 +1,7 @@
 ﻿using CourtBookingSystem.Application.Bookings.Commands.CreateBooking;
+using CourtBookingSystem.Application.Bookings.Dashboard;
 using CourtBookingSystem.Application.Bookings.Queries;
+using CourtBookingSystem.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,20 +22,27 @@ namespace CourtBookingSystem.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateBookingCommand command)
         {
-                var bookingId = await mediatR.Send(command);
-                return Ok(new { Message = "Booking created successfully.", BookingId = bookingId });
+            var bookingId = await mediatR.Send(command);
+            return Ok(new { Message = "Booking created successfully.", BookingId = bookingId });
         }
 
         [HttpGet("available-slots")]
         public async Task<IActionResult> GetAvailableSlots([FromQuery] int courtId, [FromQuery] DateTime date)
         {
-            
-                var query = new GetAvailableSlotsQuery(courtId, date);
-                var result = await mediatR.Send(query);
-                return Ok(result);
-          
+
+            var query = new GetAvailableSlotsQuery(courtId, date);
+            var result = await mediatR.Send(query);
+            return Ok(result);
+
         }
 
+        [HttpGet("admin/dashboard-stats")]
+        public async Task<IActionResult> GetDashboardStats([FromQuery] DashboardPeriod period)
+        {
 
+            var status = await mediatR.Send(new GetDashboardStatsQuery(period));
+            return Ok(status);
+
+        }
     }
 }

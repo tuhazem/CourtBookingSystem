@@ -17,7 +17,7 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
 
             RuleFor(x => x.CustomerPhone)
                 .NotEmpty().WithMessage("Customer phone is required.")
-                .Matches(@"^01[0125][0-9]{8}$").WithMessage("Invalid phone number format.")
+                .Must(phone => System.Text.RegularExpressions.Regex.IsMatch(phone, @"^01[0125][0-9]{8}$"))
                 .MaximumLength(15).WithMessage("Customer phone cannot exceed 15 characters.");
 
             RuleFor(x => x.BookingDate).GreaterThanOrEqualTo(DateTime.Today).WithMessage("Cant book in the past.");

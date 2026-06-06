@@ -1,8 +1,10 @@
 ﻿using CourtBookingSystem.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CourtBookingSystem.Domain.Entities
@@ -14,6 +16,10 @@ namespace CourtBookingSystem.Domain.Entities
 
         //Customer details
         public string CustomerName { get; set; } = string.Empty;
+
+        //regex for Egyptian phone number: starts with 01, followed by 0,1,2,5 and then 8 digits
+
+        [RegularExpression(@"^01[0125][0-9]{8}$", ErrorMessage = "Invalid Egyptian phone number format.")]
         public string CustomerPhone { get; set; } = string.Empty;
 
         //Date and time details

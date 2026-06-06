@@ -33,6 +33,7 @@ namespace CourtBookingSystem.Application.Bookings.Queries
                 .ToListAsync(cancellationToken);
 
             var slots = new List<SlotDto>();
+            var resultSlots = new List<SlotDto>();
             // Assuming the court operates from 12 pm to 12 am, we can generate slots for each hour
             var StartWorkTime = new TimeSpan(12, 0, 0); // 12:00 PM
             var EndWorkTime = TimeSpan.FromHours(24); // 12:00 AM (next day)
@@ -44,30 +45,28 @@ namespace CourtBookingSystem.Application.Bookings.Queries
                 var currentSlotEnd = currentSlotStart.Add(new TimeSpan(1, 0, 0)); // 1 hour slot
                 // Check if the current slot overlaps with any existing booking
                 var matchingBooking = bookings.FirstOrDefault(b =>
-                currentSlotStart.TotalMinutes < b.EndTime.TotalMinutes && 
-                currentSlotEnd.TotalMinutes > b.StartTime.TotalMinutes);
+                currentSlotStart < b.EndTime && currentSlotEnd > b.StartTime);
 
                 //Text Label For Front-end
                 var StartDateTiem = DateTime.Today.Add(currentSlotStart);
                 var EndDateTiem = DateTime.Today.Add(currentSlotEnd);
                 var label = $"{StartDateTiem:hh:mm tt} - {EndDateTiem:hh:mm tt}";
 
-                var slotDto = new SlotDto
+                resultSlots.Add(new SlotDto
                 {
                     TimeLabel = label,
                     StartTime = currentSlotStart,
                     EndTime = currentSlotEnd,
-                    IsAvailable = matchingBooking == null, // Available if no matching booking
-                    ReservedBy = matchingBooking?.CustomerName // Optional: Include customer name if the slot is reserved
+                    IsAvailable = matchingBooking == null,
+                    ReservedBy = matchingBooking?.CustomerName
+                });
 
-                };
-
-                slots.Add(slotDto);
+                
                 currentSlotStart = currentSlotEnd; // Move to the next slot
 
             }
 
-            return slots;
+            return resultSlots;
         }
     }
 
