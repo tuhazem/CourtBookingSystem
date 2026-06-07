@@ -101,12 +101,12 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
                     $"Hello Captain {booking.CustomerName}! Your court booking is confirmed for {booking.BookingDate:yyyy-MM-dd} at {DateTime.Today.Add(booking.StartTime):hh:mm tt}. Are you ready?"
                 );
 
-                var startDateTime = DateTime.Today.Add(booking.StartTime);
-                var endDateTime = DateTime.Today.Add(booking.EndTime);
-                var label = $"{startDateTime:hh:mm tt} - {endDateTime:hh:mm tt}";
+                var startDateTime = DateTime.Today.Add(booking.StartTime).ToString("hh:mm tt");
+                var endDateTime = DateTime.Today.Add(booking.EndTime).ToString("hh:mm tt");
+                var label = $"{startDateTime} - {endDateTime}";
 
-                
-                await signalRService.NotifySlotReservedAsync(booking.CourtId , label);
+
+                await signalRService.NotifySlotReservedAsync(booking.CourtId, label , false , booking.CustomerName , booking.CustomerPhone);
 
                 return booking.Id;
 

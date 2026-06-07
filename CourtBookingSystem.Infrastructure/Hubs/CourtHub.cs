@@ -22,9 +22,9 @@ namespace CourtBookingSystem.Infrastructure.Hubs
             this.hubContext = hubContext;
         }
 
-        public async Task NotifySlotReservedAsync(int courtId, string timeLabel)
+        public async Task NotifySlotReservedAsync(int courtId, string timeLabel , bool IsAvailable , string ReservedBy , string CustomerPhone)
         {
-            await hubContext.Clients.All.BroadcastSlotReserved(courtId, timeLabel);
+            await hubContext.Clients.All.BroadcastSlotReserved(courtId, timeLabel , IsAvailable , ReservedBy , CustomerPhone);
         }
     }
 }

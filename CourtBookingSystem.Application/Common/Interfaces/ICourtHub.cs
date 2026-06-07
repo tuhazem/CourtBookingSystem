@@ -8,11 +8,11 @@ namespace CourtBookingSystem.Application.Common.Interfaces
 {
     public interface ICourtHub
     {
-        Task BroadcastSlotReserved(int courtId, string timeLabel);
+        Task BroadcastSlotReserved(int courtId, string timeLabel , bool IsAvailable , string ReservedBy , string CustomerPhone);
     }
 
     public interface ISignalRService
     {
-        Task NotifySlotReservedAsync(int courtId, string timeLabel);
+        Task NotifySlotReservedAsync(int courtId, string timeLabel , bool IsAvailable , string ReservedBy , string CustomerPhone);
     }
 }
