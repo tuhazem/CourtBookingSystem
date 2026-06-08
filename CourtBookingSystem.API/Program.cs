@@ -2,6 +2,7 @@
 using CourtBookingSystem.Application.Common.Interfaces;
 using CourtBookingSystem.Infrastructure.Hubs;
 using CourtBookingSystem.Infrastructure.Persistence;
+using CourtBookingSystem.Infrastructure.Services;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // 1. SERVICES CONFIGURATION (Dependency Injection)
 builder.Services.AddScoped<ISmsService, FakeSmsService>();
 builder.Services.AddScoped<ISignalRService, SignalRService>();
+builder.Services.AddScoped<IJwtTokenGenerator , JwtTokenGenerator>();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 // =========================================================================
 

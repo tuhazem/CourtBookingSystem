@@ -19,9 +19,17 @@ namespace CourtBookingSystem.Infrastructure.Persistence
         public DbSet<Court> Courts => Set<Court>();
         public DbSet<Booking> Bookings => Set<Booking>();
 
+        public DbSet<SystemUser> SystemUsers => Set<SystemUser>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<SystemUser>(entity =>
+            {
+                entity.HasIndex(u => u.UserName).IsUnique();
+                entity.Property(u => u.UserName).HasMaxLength(50).IsRequired();
+                entity.Property(u => u.PasswordHash).IsRequired();
+            });
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }

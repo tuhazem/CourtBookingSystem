@@ -1,4 +1,5 @@
-﻿using CourtBookingSystem.Application.Bookings.Commands.CreateBooking;
+﻿using CourtBookingSystem.Application.Bookings.Commands;
+using CourtBookingSystem.Application.Bookings.Commands.CreateBooking;
 using CourtBookingSystem.Application.Bookings.Dashboard;
 using CourtBookingSystem.Application.Bookings.Queries;
 using CourtBookingSystem.Domain.Enums;
@@ -43,6 +44,20 @@ namespace CourtBookingSystem.API.Controllers
             var status = await mediatR.Send(new GetDashboardStatsQuery(period));
             return Ok(status);
 
+        }
+
+        [HttpGet("Pending-Bookings")]
+        public async Task<IActionResult> GetPendingBookings()
+        {
+            var result = await mediatR.Send(new GetPendingBookings());
+            return Ok(result);
+        }
+
+        [HttpPut("confirm/{id}")]
+        public async Task<IActionResult> Confirm(Guid id)
+        {
+            var result = await mediatR.Send(new ConfirmBookingCommand(id));
+            return Ok(result);
         }
     }
 }

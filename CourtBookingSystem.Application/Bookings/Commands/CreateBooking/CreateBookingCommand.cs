@@ -89,7 +89,7 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
                     EndTime = request.EndTime,
                     TotalPrice = totalPrice,
                     DepositPaid = deposit,
-                    Status = BookingStatus.Confirmed // Default status when creating a booking, can be updated later based on payment or other conditions
+                    Status = BookingStatus.Pending // Default status when creating a booking, can be updated later based on payment or other conditions
                 };
 
                 await context.Bookings.AddAsync(booking, cancellationToken);

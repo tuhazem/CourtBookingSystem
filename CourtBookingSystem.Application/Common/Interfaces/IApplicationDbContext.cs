@@ -13,6 +13,9 @@ namespace CourtBookingSystem.Application.Common.Interfaces
     {
         DbSet<Court> Courts { get; }
         DbSet<Booking> Bookings { get; }
+
+        DbSet<SystemUser> SystemUsers { get; }
+
         DatabaseFacade Database { get; } 
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
