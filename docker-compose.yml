@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  court_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: court_booking_database
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SecureP@ssword2026!
+    ports:
+      - "1433:1433"
+    # 🎯 الحتة دي بتخلي الدوكر يتأكد إن الـ SQL Server فتح البورت وصحي بجد
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-C", "-S", "localhost", "-U", "sa", "-P", "SecureP@ssword2026!", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  court_api:
+    image: court-booking-api-image
+    container_name: court_booking_backend_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=court_db;Database=CourtBookingDB;User Id=sa;Password=SecureP@ssword2026!;TrustServerCertificate=True;
+    ports:
+      - "5000:8080"
+    depends_on:
+      court_db:
+        condition: service_healthy # 🎯 السطر ده بيمنع الـ API تقوم إلا لما الداتابيز تعدي الـ healthcheck وتصحى 100%
