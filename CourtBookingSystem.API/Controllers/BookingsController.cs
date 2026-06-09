@@ -4,6 +4,7 @@ using CourtBookingSystem.Application.Bookings.Dashboard;
 using CourtBookingSystem.Application.Bookings.Queries;
 using CourtBookingSystem.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,8 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpPost]
+        //[Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         public async Task<IActionResult> Create([FromBody] CreateBookingCommand command)
         {
             var bookingId = await mediatR.Send(command);
@@ -28,6 +31,7 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpGet("available-slots")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAvailableSlots([FromQuery] int courtId, [FromQuery] DateTime date)
         {
 
@@ -38,6 +42,7 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpGet("admin/dashboard-stats")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetDashboardStats([FromQuery] DashboardPeriod period)
         {
 
@@ -47,6 +52,8 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpGet("Pending-Bookings")]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> GetPendingBookings()
         {
             var result = await mediatR.Send(new GetPendingBookings());
@@ -54,6 +61,7 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpPut("confirm/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Confirm(Guid id)
         {
             var result = await mediatR.Send(new ConfirmBookingCommand(id));

@@ -1,6 +1,7 @@
 ﻿using CourtBookingSystem.Application.Courts.Commands;
 using CourtBookingSystem.Application.Courts.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,8 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Create([FromBody] CreateCourtCommand command)
         {
 
@@ -28,6 +31,8 @@ namespace CourtBookingSystem.API.Controllers
 
 
         [HttpPut("Update-price")]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> UpdatePrice([FromBody] UpdateCourtPriceCommand command)
         {
             var result = await mediator.Send(command);
@@ -39,6 +44,7 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpPut("Toggle-status")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ToggleStatus([FromBody] ToggleCourtStatusCommand command)
         {
             var result = await mediator.Send(command);
@@ -52,6 +58,7 @@ namespace CourtBookingSystem.API.Controllers
 
 
         [HttpGet("admin/courts/{courtId}/performance")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCourtPerformance([FromRoute] int courtId)
         {
             var matrics = await mediator.Send(new GetCourtPerformanceQuery(courtId));
