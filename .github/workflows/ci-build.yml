@@ -1,36 +1,32 @@
-name: .NET Core & Docker CI
+name: NET Core and Docker CI
 
-# 🎯 الـ Pipeline هتشتغل أوتوماتيك أول ما تعمل Push أو Pull Request على فرع الـ main
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - master
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # سيرفر لينكس مجاني من جيت هاب
+    runs-on: ubuntu-latest
 
     steps:
-    # 1. ينسخ كود المشروع جوه السيرفر
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 2. يسطب بيئة الـ .NET عشان يعمل تشيك على الكود
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x' # 👈 تأكد إنها نفس نسخة الـ .NET اللي شغال بيها
+        dotnet-version: '9.0.x' 
 
-    # 3. ينزل المكتبات والـ Nuget Packages
     - name: Restore dependencies
       run: dotnet restore
 
-    # 4. يعمل Build للمشروع كـ C# عادي يتأكد إن مفيش Syntax Errors
     - name: Build C# Project
       run: dotnet build --no-restore --configuration Release
 
-    # 5. الخطوة الصايعة: يجرّب يبني الـ Docker Image عشان يطمن إن الـ Dockerfile بتاعك مسطرة
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
@@ -39,4 +35,4 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        push: false # 🎯 مش هنرفع في حتة دلوقتي، بنجرب البناء بس
+        push: false
