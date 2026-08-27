@@ -1,4 +1,4 @@
-﻿using CourtBookingSystem.Application.Common.Interfaces;
+using CourtBookingSystem.Application.Common.Interfaces;
 using CourtBookingSystem.Domain.Entities;
 using CourtBookingSystem.Domain.Enums;
 using MediatR;
@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
         public async Task<Guid> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
         {
 
-            using var transaction = await context.Database.BeginTransactionAsync(cancellationToken);
+            using var transaction = await context.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
 
             try
             {
@@ -112,11 +113,15 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
 
 
             }
+            catch (DbUpdateException)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw new Exception("The selected time slot is already booked.");
+            }
             catch (Exception)
             {
-                await transaction.RollbackAsync();
+                await transaction.RollbackAsync(cancellationToken);
                 throw;
-
             }
         }
 

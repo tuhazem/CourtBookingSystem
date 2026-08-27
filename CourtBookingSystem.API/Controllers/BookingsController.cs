@@ -1,4 +1,5 @@
-﻿using CourtBookingSystem.Application.Bookings.Commands;
+using CourtBookingSystem.Application.Bookings.Commands;
+using CourtBookingSystem.Application.Bookings.Commands.CancelBooking;
 using CourtBookingSystem.Application.Bookings.Commands.CreateBooking;
 using CourtBookingSystem.Application.Bookings.Dashboard;
 using CourtBookingSystem.Application.Bookings.Queries;
@@ -7,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace CourtBookingSystem.API.Controllers
 {
@@ -22,8 +24,8 @@ namespace CourtBookingSystem.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
         [AllowAnonymous]
+        [EnableRateLimiting("BookingRateLimit")]
         public async Task<IActionResult> Create([FromBody] CreateBookingCommand command)
         {
             var bookingId = await mediatR.Send(command);
@@ -66,6 +68,14 @@ namespace CourtBookingSystem.API.Controllers
         {
             var result = await mediatR.Send(new ConfirmBookingCommand(id));
             return Ok(result);
+        }
+
+        [HttpPut("cancel/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Cancel(Guid id)
+        {
+            var result = await mediatR.Send(new CancelBookingCommand(id));
+            return Ok(new { Message = result });
         }
     }
 }

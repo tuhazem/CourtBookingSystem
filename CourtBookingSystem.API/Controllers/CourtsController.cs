@@ -1,5 +1,6 @@
-﻿using CourtBookingSystem.Application.Courts.Commands;
+using CourtBookingSystem.Application.Courts.Commands;
 using CourtBookingSystem.Application.Courts.Queries;
+using CourtBookingSystem.Application.Courts.Queries.GetCourts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,14 @@ namespace CourtBookingSystem.API.Controllers
         public CourtsController(IMediator mediator)
         {
             this.mediator = mediator;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAll([FromQuery] bool? isActiveOnly = true)
+        {
+            var courts = await mediator.Send(new GetCourtsQuery(isActiveOnly));
+            return Ok(courts);
         }
 
         [HttpPost]

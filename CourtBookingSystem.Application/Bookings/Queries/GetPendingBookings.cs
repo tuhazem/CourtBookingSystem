@@ -1,4 +1,4 @@
-﻿using CourtBookingSystem.Application.Common.Interfaces;
+using CourtBookingSystem.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,12 +13,12 @@ namespace CourtBookingSystem.Application.Bookings.Queries
     public class PendingBookingDto
     {
         public Guid Id { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerPhone { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
+        public string CustomerPhone { get; set; } = string.Empty;
         public DateTime BookingDate { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-        public string CourtName { get; set; }
+        public string CourtName { get; set; } = string.Empty;
     }
 
     public record GetPendingBookings : IRequest<List<PendingBookingDto>>;

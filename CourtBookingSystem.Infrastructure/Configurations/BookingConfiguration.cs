@@ -1,4 +1,4 @@
-﻿using CourtBookingSystem.Domain.Entities;
+using CourtBookingSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -40,6 +40,11 @@ namespace CourtBookingSystem.Infrastructure.Configurations
                 .WithMany(c => c.Bookings)
                 .HasForeignKey(b => b.CourtId)
                 .OnDelete(DeleteBehavior.Restrict); // Restrict عشان لو مسحنا ملعب بالغلط وفيه حجوزات السيستم يمنع ده
+
+            // Unique index to prevent double bookings at the database level for active/pending slots
+            builder.HasIndex(b => new { b.CourtId, b.BookingDate, b.StartTime })
+                .IsUnique()
+                .HasFilter("[Status] <> 2");
         }
     }
 }
