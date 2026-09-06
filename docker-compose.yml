@@ -23,8 +23,9 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Production}
-      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING:-Server=court_db;Database=CourtBookingDB;User Id=sa;Password=SecureP@ssword2026!;TrustServerCertificate=True;}
+      - TZ=Africa/Cairo
     ports:
       - "5000:8080"
     depends_on:

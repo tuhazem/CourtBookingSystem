@@ -1,4 +1,4 @@
-﻿using CourtBookingSystem.Application.Common.Interfaces;
+using CourtBookingSystem.Application.Common.Interfaces;
 using CourtBookingSystem.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -42,15 +42,18 @@ namespace CourtBookingSystem.Application.Bookings.Dashboard
             {
                 case DashboardPeriod.Today:
                     startDate = today;
+                    endDate = today.AddDays(1).AddTicks(-1);
                     break;
 
                 case DashboardPeriod.ThisWeek:
                     int diff = (7 + (today.DayOfWeek - DayOfWeek.Saturday)) % 7;
                     startDate = today.AddDays(-1 * diff).Date;
+                    endDate = startDate.AddDays(7).AddTicks(-1);
                     break;
 
                 case DashboardPeriod.ThisMonth:
                     startDate = new DateTime(today.Year, today.Month, 1);
+                    endDate = startDate.AddMonths(1).AddTicks(-1);
                     break;
             }
 

@@ -16,16 +16,7 @@ import { getAuthToken } from './auth';
 
 // TODO: Future enhancement - SignalR real-time updates
 
-const API_BASE_URL = (() => {
-  const url = process.env.NEXT_PUBLIC_API_BASE_URL;
-  if (!url) {
-    throw new Error(
-      '[CourtBookingSystem] NEXT_PUBLIC_API_BASE_URL is not set. ' +
-      'Add it to your .env.local (local dev) or Vercel environment variables (production).'
-    );
-  }
-  return url;
-})();
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api';
 
 /**
  * Helper to build auth headers with JWT Bearer token
