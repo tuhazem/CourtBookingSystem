@@ -26,4 +26,6 @@ RUN dotnet publish "CourtBookingSystem.API.csproj" -c Release -o /app/publish /p
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+# Listen on whatever port Render injects via $PORT (falls back to 8080 for local Docker runs)
+ENV ASPNETCORE_URLS=http://+:${PORT:-8080}
 ENTRYPOINT ["dotnet", "CourtBookingSystem.API.dll"]

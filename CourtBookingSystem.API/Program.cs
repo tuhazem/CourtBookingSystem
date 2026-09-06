@@ -134,7 +134,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Render (and most cloud platforms) terminate TLS at the edge proxy and forward
+// plain HTTP to the container — unconditional HTTPS redirection causes redirect loops.
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseRateLimiter();
 
