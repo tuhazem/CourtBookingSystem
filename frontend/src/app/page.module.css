@@ -1,0 +1,161 @@
+.main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 5.5rem 1rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 1.5rem 1.25rem 3rem 1.25rem;
+  }
+}
+
+.filterSection {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .filterSection {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.filterPills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 700;
+  background-color: #ffffff;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filterBtn:hover {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-color: rgba(0, 109, 55, 0.3);
+}
+
+.filterBtnActive {
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 4px 12px rgba(0, 109, 55, 0.25);
+}
+
+.sortNote {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.emptyState {
+  background-color: #ffffff;
+  border-radius: var(--radius-2xl);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  margin-bottom: 4rem;
+}
+
+/* Owner Banner */
+.ownerBanner {
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+  border-radius: var(--radius-2xl);
+  padding: 2.5rem 1.75rem;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 860px) {
+  .ownerBanner {
+    flex-direction: row;
+    text-align: right;
+    justify-content: space-between;
+    padding: 3rem 2.5rem;
+  }
+}
+
+.ownerText h3 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.ownerText p {
+  color: #d1fae5;
+  font-size: 0.9375rem;
+  max-width: 550px;
+  line-height: 1.6;
+}
+
+.ownerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.75rem;
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  color: #064e3b;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.ownerBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}

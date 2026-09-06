@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# AI assistant workspace folders (Antigravity, Claude, etc.)
+.agents/
+.claude/
+skills-lock.json

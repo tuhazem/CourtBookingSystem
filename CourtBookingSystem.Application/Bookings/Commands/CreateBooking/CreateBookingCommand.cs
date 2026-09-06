@@ -39,90 +39,91 @@ namespace CourtBookingSystem.Application.Bookings.Commands.CreateBooking
 
         public async Task<Guid> Handle(CreateBookingCommand request, CancellationToken cancellationToken)
         {
+            var strategy = context.Database.CreateExecutionStrategy();
 
-            using var transaction = await context.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
-
-            try
+            return await strategy.ExecuteAsync(async () =>
             {
-                var courtExists = await context.Courts
-                    .FirstOrDefaultAsync(c => c.Id == request.CourtId && c.IsActive, cancellationToken);
+                using var transaction = await context.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
 
-                if (courtExists == null)
+                try
                 {
-                    throw new Exception("Court not found or inactive.");
+                    var courtExists = await context.Courts
+                        .FirstOrDefaultAsync(c => c.Id == request.CourtId && c.IsActive, cancellationToken);
+
+                    if (courtExists == null)
+                    {
+                        throw new Exception("Court not found or inactive.");
+                    }
+
+                    //overlapping booking check
+                    //new booking: [start, end]
+                    //existing booking: [existingStart, existingEnd]
+
+                    var isOverLapping = await context.Bookings.AnyAsync(b =>
+                        b.CourtId == request.CourtId &&
+                        b.BookingDate.Date == request.BookingDate.Date &&
+                        b.Status != BookingStatus.Cancelled &&
+                        ((request.StartTime >= b.StartTime && request.StartTime < b.EndTime) ||
+                         (request.EndTime > b.StartTime && request.EndTime <= b.EndTime) ||
+                         (request.StartTime <= b.StartTime && request.EndTime >= b.EndTime)),
+                        cancellationToken);
+
+                    if (isOverLapping)
+                    {
+                        throw new Exception("The selected time slot is already booked.");
+                    }
+
+                    var durationHours = (decimal)(request.EndTime - request.StartTime).TotalHours;
+
+                    if (durationHours <= 0)
+                    {
+                        throw new Exception("End time must be after start time , Must be 1 Hour Or More");
+                    }
+
+                    var totalPrice = durationHours * courtExists.PricePerHour;
+                    var deposit = totalPrice * 0.5m; // 50% deposit
+
+                    var booking = new Booking
+                    {
+                        CourtId = request.CourtId,
+                        CustomerName = request.CustomerName,
+                        CustomerPhone = request.CustomerPhone,
+                        BookingDate = request.BookingDate,
+                        StartTime = request.StartTime,
+                        EndTime = request.EndTime,
+                        TotalPrice = totalPrice,
+                        DepositPaid = deposit,
+                        Status = BookingStatus.Pending // Default status when creating a booking, can be updated later based on payment or other conditions
+                    };
+
+                    await context.Bookings.AddAsync(booking, cancellationToken);
+                    await context.SaveChangesAsync(cancellationToken);
+
+                    await transaction.CommitAsync(cancellationToken);
+                    await SmsService.SendSmsAsync(
+                        booking.CustomerPhone,
+                        $"Hello Captain {booking.CustomerName}! Your court booking is confirmed for {booking.BookingDate:yyyy-MM-dd} at {DateTime.Today.Add(booking.StartTime):hh:mm tt}. Are you ready?"
+                    );
+
+                    var startDateTime = DateTime.Today.Add(booking.StartTime).ToString("hh:mm tt");
+                    var endDateTime = DateTime.Today.Add(booking.EndTime).ToString("hh:mm tt");
+                    var label = $"{startDateTime} - {endDateTime}";
+
+                    await signalRService.NotifySlotReservedAsync(booking.CourtId, label , false , booking.CustomerName , booking.CustomerPhone);
+
+                    return booking.Id;
                 }
-
-                //overlapping booking check
-                //new booking: [start, end]
-                //existing booking: [existingStart, existingEnd]
-
-                var isOverLapping = await context.Bookings.AnyAsync(b =>
-                    b.CourtId == request.CourtId &&
-                    b.BookingDate.Date == request.BookingDate.Date &&
-                    b.Status != BookingStatus.Cancelled &&
-                    ((request.StartTime >= b.StartTime && request.StartTime < b.EndTime) ||
-                     (request.EndTime > b.StartTime && request.EndTime <= b.EndTime) ||
-                     (request.StartTime <= b.StartTime && request.EndTime >= b.EndTime)),
-                    cancellationToken);
-
-                if (isOverLapping)
+                catch (DbUpdateException)
                 {
+                    await transaction.RollbackAsync(cancellationToken);
                     throw new Exception("The selected time slot is already booked.");
                 }
-
-                var durationHours = (decimal)(request.EndTime - request.StartTime).TotalHours;
-
-                if (durationHours <= 0)
+                catch (Exception)
                 {
-                    throw new Exception("End time must be after start time , Must be 1 Hour Or More");
+                    await transaction.RollbackAsync(cancellationToken);
+                    throw;
                 }
-
-                var totalPrice = durationHours * courtExists.PricePerHour;
-                var deposit = totalPrice * 0.5m; // 50% deposit
-
-                var booking = new Booking
-                {
-                    CourtId = request.CourtId,
-                    CustomerName = request.CustomerName,
-                    CustomerPhone = request.CustomerPhone,
-                    BookingDate = request.BookingDate,
-                    StartTime = request.StartTime,
-                    EndTime = request.EndTime,
-                    TotalPrice = totalPrice,
-                    DepositPaid = deposit,
-                    Status = BookingStatus.Pending // Default status when creating a booking, can be updated later based on payment or other conditions
-                };
-
-                await context.Bookings.AddAsync(booking, cancellationToken);
-                await context.SaveChangesAsync(cancellationToken);
-
-                await transaction.CommitAsync(cancellationToken);
-                await SmsService.SendSmsAsync(
-                    booking.CustomerPhone,
-                    $"Hello Captain {booking.CustomerName}! Your court booking is confirmed for {booking.BookingDate:yyyy-MM-dd} at {DateTime.Today.Add(booking.StartTime):hh:mm tt}. Are you ready?"
-                );
-
-                var startDateTime = DateTime.Today.Add(booking.StartTime).ToString("hh:mm tt");
-                var endDateTime = DateTime.Today.Add(booking.EndTime).ToString("hh:mm tt");
-                var label = $"{startDateTime} - {endDateTime}";
-
-
-                await signalRService.NotifySlotReservedAsync(booking.CourtId, label , false , booking.CustomerName , booking.CustomerPhone);
-
-                return booking.Id;
-
-
-            }
-            catch (DbUpdateException)
-            {
-                await transaction.RollbackAsync(cancellationToken);
-                throw new Exception("The selected time slot is already booked.");
-            }
-            catch (Exception)
-            {
-                await transaction.RollbackAsync(cancellationToken);
-                throw;
-            }
+            });
         }
 
 

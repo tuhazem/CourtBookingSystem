@@ -1,0 +1,74 @@
+.footer {
+  margin-top: auto;
+  background-color: #ffffff;
+  border-top: 1px solid var(--color-border);
+  padding: 2.5rem 0 5rem 0;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 2.5rem 0;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    text-align: right;
+  }
+}
+
+.brandSide {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoBadge {
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footerLogoImg {
+  height: 1.85rem;
+  width: auto;
+  max-width: 3.5rem;
+  object-fit: contain;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.links a:hover {
+  color: var(--color-primary);
+}
+
+.dividerDot {
+  color: var(--color-border-dark);
+}

@@ -1,0 +1,175 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 6.5rem 1rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 1.5rem 1.25rem 4rem 1.25rem;
+  }
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.backBtn:hover {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-color: rgba(0, 109, 55, 0.3);
+  transform: translateX(2px);
+}
+
+.courtHero {
+  background-color: #ffffff;
+  border-radius: var(--radius-2xl);
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .courtHero {
+    padding: 1.75rem;
+  }
+}
+
+.heroMedia {
+  position: relative;
+  height: 15rem;
+  width: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: linear-gradient(135deg, #064e3b, #065f46);
+}
+
+@media (min-width: 640px) {
+  .heroMedia {
+    height: 19rem;
+  }
+}
+
+.heroSvg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.priceTagOverlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: left;
+}
+
+.priceTagLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.priceTagValue {
+  font-size: 1.375rem;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.priceTagUnit {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.heroContentOverlay {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  left: 1.25rem;
+  color: #ffffff;
+}
+
+.heroTitle {
+  font-size: 1.625rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 640px) {
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+}
+
+.heroTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.heroTag {
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.perksBar {
+  margin-top: 1rem;
+  padding-top: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.perksList {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+}
+
+.perkCheck {
+  color: var(--color-primary);
+  font-weight: 900;
+  font-size: 1rem;
+}

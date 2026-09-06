@@ -1,0 +1,265 @@
+.section {
+  background-color: #ffffff;
+  border-radius: var(--radius-2xl);
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: 1.75rem;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--color-text-primary);
+}
+
+.hourBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-full);
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  background-color: var(--color-surface-hover);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.legendDotAvailable {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
+
+.legendDotSelected {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.5rem;
+}
+
+.legendDotBooked {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--radius-full);
+  background-color: #cbd5e1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Slot Card - Available */
+.slotAvailable {
+  padding: 1rem;
+  border-radius: var(--radius-xl);
+  border: 2px solid rgba(16, 185, 129, 0.6);
+  background-color: #ffffff;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.slotAvailable:hover {
+  background-color: var(--color-primary-soft);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.slotAvailable:active {
+  transform: scale(0.97);
+}
+
+.slotInfo {
+  text-align: right;
+}
+
+.slotTime {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+.slotStatusText {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: 0.125rem;
+}
+
+.plusIcon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
+  transition: transform var(--transition-fast);
+}
+
+.slotAvailable:hover .plusIcon {
+  transform: scale(1.15);
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* Slot Card - Selected */
+.slotSelected {
+  padding: 1rem;
+  border-radius: var(--radius-xl);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: 2px solid var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.selectedBadge {
+  font-size: 0.625rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-bottom: 0.125rem;
+}
+
+.slotSelected .slotTime {
+  color: #ffffff;
+}
+
+.checkIcon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  background-color: #ffffff;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 900;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Slot Card - Booked */
+.slotBooked {
+  padding: 1rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid #cbd5e1;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: not-allowed;
+  user-select: none;
+  opacity: 0.85;
+}
+
+.bookedTime {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+
+.bookedText {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 0.125rem;
+}
+
+.bookedBadge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #94a3b8;
+}

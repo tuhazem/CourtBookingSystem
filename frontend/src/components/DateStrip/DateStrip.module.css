@@ -1,0 +1,121 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--color-text-primary);
+}
+
+.monthBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface-hover);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.carousel {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  padding-top: 0.25rem;
+  scroll-snap-type: x mandatory;
+}
+
+.dateItem {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  min-width: 8rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-xl);
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  text-align: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dateItem:hover:not(.dateItemActive) {
+  border-color: rgba(0, 109, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.dateItemActive {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 8px 20px rgba(0, 109, 55, 0.25);
+  transform: scale(1.03);
+}
+
+.activeBadge {
+  position: absolute;
+  top: -0.625rem;
+  right: 0.75rem;
+  background-color: #6bfe9c;
+  color: var(--color-primary-dark);
+  font-size: 0.625rem;
+  font-weight: 900;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dayLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.dateItemActive .dayLabel {
+  color: rgba(232, 248, 239, 0.9);
+}
+
+.dateNumber {
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.dateItemActive .dateNumber {
+  color: #ffffff;
+}
+
+.slotsIndicator {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.dateItemActive .slotsIndicator {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
