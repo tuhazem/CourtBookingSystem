@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Chivo:wght@700;800;900&family=Hanken+Grotesk:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+/* Fonts are loaded via next/font/google in layout.tsx — no @import needed */
 
 :root {
   /* Brand Colors - Pitch Green */
@@ -38,9 +37,9 @@
   --color-error: #ba1a1a;
   --color-error-soft: #fee2e2;
 
-  /* Font Families */
-  --font-cairo: 'Cairo', system-ui, -apple-system, sans-serif;
-  --font-chivo: 'Chivo', system-ui, sans-serif;
+  /* Font Families — CSS variables set by next/font on <html> element */
+  --font-cairo: var(--font-cairo, 'Cairo', system-ui, -apple-system, sans-serif);
+  --font-chivo: var(--font-chivo, 'Chivo', system-ui, sans-serif);
   --font-hanken: 'Hanken Grotesk', system-ui, sans-serif;
 
   /* Border Radii */

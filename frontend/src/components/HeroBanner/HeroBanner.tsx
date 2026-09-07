@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { transitions } from '@/lib/animations';
 import styles from './HeroBanner.module.css';
@@ -7,11 +8,10 @@ import styles from './HeroBanner.module.css';
 export default function HeroBanner() {
   return (
     <section className={styles.heroSection}>
-      {/* Ambient Floating Glow Lights */}
+      {/* Ambient Floating Glow Lights — opacity-only animation (compositor-safe, no repaint) */}
       <motion.div
         className={styles.glowBall1}
         animate={{
-          scale: [1, 1.2, 1],
           opacity: [0.35, 0.55, 0.35],
         }}
         transition={{
@@ -23,7 +23,6 @@ export default function HeroBanner() {
       <motion.div
         className={styles.glowBall2}
         animate={{
-          scale: [1.2, 1, 1.2],
           opacity: [0.25, 0.45, 0.25],
         }}
         transition={{
@@ -33,9 +32,16 @@ export default function HeroBanner() {
         }}
       />
 
-      {/* Branded Pitch Watermark */}
+      {/* Branded Pitch Watermark — decorative, no priority needed */}
       <div className={styles.heroWatermark}>
-        <img src="/images/logo.png" alt="" aria-hidden="true" className={styles.watermarkImg} />
+        <Image
+          src="/images/logo.png"
+          alt=""
+          aria-hidden="true"
+          className={styles.watermarkImg}
+          width={120}
+          height={120}
+        />
       </div>
 
       <div className={styles.content}>

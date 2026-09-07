@@ -17,7 +17,6 @@ export default function CourtCard({ court }: CourtCardProps) {
 
   return (
     <motion.article
-      layout
       variants={fadeUpVariants}
       initial="hidden"
       animate="visible"

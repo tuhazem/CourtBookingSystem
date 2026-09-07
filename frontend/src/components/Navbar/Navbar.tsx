@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
@@ -13,7 +14,15 @@ export default function Navbar() {
         {/* Brand Logo & Name */}
         <Link href="/" className={styles.brand}>
           <div className={styles.logoContainer}>
-            <img src="/images/logo.png" alt="شعار منصة ملعبنا" className={styles.logoImg} />
+            {/* priority: above-fold LCP candidate — next/image auto-preloads */}
+            <Image
+              src="/images/logo.png"
+              alt="شعار منصة ملعبنا"
+              className={styles.logoImg}
+              width={40}
+              height={40}
+              priority
+            />
           </div>
           <div className={styles.brandText}>
             <div className={styles.brandTitleRow}>
