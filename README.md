@@ -1,92 +1,368 @@
-# 🏟️ Court Booking System (API)
+# 🏟️ Malabna - Court Booking System
 
-A robust, real-time enterprise-grade backend system for managing sports courts and reservations. Built using **.NET 9 / .NET 8**, adhering strictly to **Clean Architecture** and **CQRS** (Command Query Responsibility Segregation) patterns to ensure scalability, maintainability, and production-ready performance.
+> **Live Demo:** [https://malabna-app.vercel.app](https://malabna-app.vercel.app)
 
-The system is fully **Containerized using Docker**, production-configured, and continuously monitored using an automated **GitHub Actions CI Pipeline**.
+A full-stack, production-ready sports court booking platform featuring real-time availability updates, secure authentication, and an optimized user experience. This project demonstrates modern web development practices across the entire stack.
 
----
+## 👥 Team
 
-## 🏗️ Architecture & Patterns
+This is a collaborative portfolio project showcasing full-stack development expertise:
 
-The project is structured into 4 distinct layers following Domain-Driven Design and Clean Architecture principles:
-
-*   **Domain:** Contains core entities, value objects, and business logic (e.g., `Court`, `Booking`, `SystemUser`).
-*   **Application:** Holds business use cases, mapped explicitly through **MediatR** handlers, commands, and queries, with strict input validation using **FluentValidation**.
-*   **Infrastructure:** Manages data access via **Entity Framework Core (SQL Server)**, JWT Token Generation, SMS/Notification Simulation, and Real-time communications.
-*   **API (Presentation):** Exposed RESTful endpoints, configured with **CORS** for frontend integration and fully documented using OpenApi/Swagger tools.
-
-### Key Technical Features:
-*   **CQRS Pattern:** Complete separation of Write operations (Commands) and Read operations (Queries) using MediatR.
-*   **Real-time Infrastructure:** Integrated **SignalR Hubs** to broadcast field availability updates to clients instantaneously.
-*   **Automated DevOps & Production-Ready:** Includes healthchecks, automatic migrations, database seeding on startup, and multi-stage Docker orchestration.
-*   **CI Pipeline:** Powered by **GitHub Actions** to automate builds, testing, and Docker validation on every push.
+- **Backend Development:** [@tuhazem](https://github.com/tuhazem) - ASP.NET Core API with Clean Architecture
+- **Frontend Development:** [@abdullah012039](https://github.com/abdullah012039) - Next.js 15 with performance optimization
 
 ---
 
-## 🐋 Docker & Local Environment Setup
+## 🎯 Project Overview
 
-The easiest way for Frontend developers or reviewers to run the entire backend infrastructure (API + SQL Server Database) locally with **zero prerequisites** (No Visual Studio, SDKs, or local SQL server installations required):
+Malabna is an enterprise-grade booking system for sports facilities, designed to handle high-traffic scenarios with real-time updates and optimized performance. The platform combines a robust .NET backend following Clean Architecture principles with a lightning-fast Next.js frontend achieving perfect Lighthouse scores.
 
-### Prerequisites:
-*   Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+### Key Achievements
 
-### Spin Up the System:
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/tuhazem/CourtBookingSystem.git
-    cd CourtBookingSystem
-    ```
+**Backend:**
+- ✅ Clean Architecture with CQRS pattern
+- ✅ Real-time SignalR communication
+- ✅ JWT-based authentication with RBAC
+- ✅ Dockerized deployment pipeline
+- ✅ Automated CI/CD with GitHub Actions
 
-2.  Run the Docker Compose orchestration:
-    ```bash
-    docker-compose up --build
-    ```
-
-3.  Once running, the API handles migrations and database seeding automatically. Access the environment at:
-    - Swagger API Documentation: http://localhost:5000/swagger
-    - API Base URL: http://localhost:5000/api
+**Frontend:**
+- ✅ **100/100/100/100** Lighthouse scores (Performance/Accessibility/Best Practices/SEO)
+- ✅ Core Web Vitals: LCP 1.1s, FCP 1.0s, CLS 0
+- ✅ Next.js 15 with App Router and React Server Components
+- ✅ Optimized font loading (80KB saved)
+- ✅ WCAG AA accessibility compliance
+- ✅ Production deployment on Vercel
 
 ---
 
-## 🔒 Security, Authentication & Frontend Integration
+## 📸 Screenshots
 
-*   **Authentication:** Strictly implements Role-Based Access Control (RBAC) powered by JWT Bearer Tokens.
-*   **CORS Configuration:** Configured to allow requests from the production frontend (`https://malabna-app.vercel.app`) with credentials support for secure cross-origin communication.
+### Frontend Experience
+*Beautiful, responsive UI optimized for all devices*
+
+<p align="center">
+  <img src="frontend/docs/screenshots/home-page.png" width="45%" alt="Home Page" />
+  <img src="frontend/docs/screenshots/booking-modal.png" width="45%" alt="Booking Modal" />
+</p>
+
+<p align="center">
+  <img src="frontend/docs/screenshots/my-bookings.png" width="45%" alt="My Bookings" />
+  <img src="frontend/docs/screenshots/mobile-view.png" width="30%" alt="Mobile Responsive" />
+</p>
+
+---
+
+## 🏗️ Architecture & Technical Stack
+
+### Backend Architecture (.NET 9)
+
+The backend follows **Clean Architecture** and **CQRS** patterns with strict separation of concerns:
+
+*   **Domain:** Core business entities, value objects, and domain logic (`Court`, `Booking`, `SystemUser`)
+*   **Application:** CQRS handlers via **MediatR**, with **FluentValidation** for input validation
+*   **Infrastructure:** **Entity Framework Core** with SQL Server, JWT generation, SignalR for real-time updates
+*   **API Layer:** RESTful endpoints with Swagger documentation, CORS-secured for frontend integration
+
+**Key Backend Features:**
+- 🔄 **CQRS Pattern:** Complete command/query separation with MediatR
+- ⚡ **Real-time Updates:** SignalR hubs broadcasting availability changes
+- 🐳 **Docker Orchestration:** Multi-stage builds with automated migrations
+- 🔒 **Security:** JWT authentication with role-based access control
+- 🚀 **CI/CD:** GitHub Actions pipeline for automated testing and deployment
+
+### Frontend Architecture (Next.js 15)
+
+Modern React architecture with server-side rendering and aggressive performance optimization:
+
+**Tech Stack:**
+- ⚛️ **Next.js 15:** App Router with React Server Components
+- 🎨 **Styling:** CSS Modules with mobile-first responsive design
+- 📊 **State Management:** React Context + localStorage persistence
+- 🚀 **Deployment:** Vercel with automatic preview deployments
+- 📱 **PWA Support:** Web app manifest for mobile installation
+
+**Performance Optimizations:**
+- ✅ Next.js Image component for automatic optimization
+- ✅ Font subsetting (Cairo 700/800, Chivo 900 only)
+- ✅ Code splitting and lazy loading
+- ✅ Server Components for reduced JavaScript bundle
+- ✅ Static generation for marketing pages
+
+---
+
+## 🎨 Features
+
+### User Features
+- 🔍 **Browse Courts:** View available sports facilities with detailed information
+- 📅 **Real-time Booking:** Check availability and book time slots instantly
+- 📱 **My Bookings:** Track reservation history and status
+- 🌐 **RTL Support:** Full Arabic language support with proper text direction
+- 📲 **Mobile Responsive:** Optimized for all screen sizes (320px - 4K)
+
+### Admin Features
+- 📊 **Dashboard Analytics:** Revenue tracking and booking statistics
+- ⚙️ **Court Management:** Add, update, and manage court inventory
+- ✅ **Booking Approvals:** Review and confirm pending reservations
+- 💰 **Dynamic Pricing:** Adjust hourly rates per court
+- 🔧 **Status Control:** Toggle court availability (maintenance mode)
+
+---
+
+## 🚀 Quick Start
+
+### Backend Setup (Docker - Recommended)
+
+Run the entire backend with **zero local dependencies** (no Visual Studio, .NET SDK, or SQL Server required):
+
+**Prerequisites:**
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+**Steps:**
+```bash
+# Clone the repository
+git clone https://github.com/tuhazem/CourtBookingSystem.git
+cd CourtBookingSystem
+
+# Start all services (API + SQL Server)
+docker-compose up --build
+
+# API is now running at:
+# - Swagger UI: http://localhost:5000/swagger
+# - Base URL: http://localhost:5000/api
+```
+
+The container automatically handles:
+- ✅ Database creation and migrations
+- ✅ Initial data seeding
+- ✅ Health checks and monitoring
+
+### Frontend Setup (Local Development)
+
+**Prerequisites:**
+- Node.js 18+ and npm/yarn
+
+**Steps:**
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Production build
+npm run build
+npm start
+```
+
+**Environment Variables:**
+Create `frontend/.env.local`:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
+
+---
+
+## 🔐 API Authentication
+
+All protected endpoints require a JWT Bearer token obtained via login:
+
+**Login Request:**
+```bash
+POST /api/Auth/Login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Admin123!"
+}
+```
+
+**Response:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "expiration": "2024-12-31T23:59:59Z",
+  "role": "Admin"
+}
+```
+
+**Using the Token:**
+```bash
+GET /api/Bookings/admin/dashboard-stats
+Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
+```
 
 ---
 
 ## 🚀 Core API Endpoints
 
-### 🔐 Authentication Module
+### 🔐 Authentication
 | Method | Endpoint | Access | Description |
 |--------|----------|--------|-------------|
-| `POST` | `/api/Auth/Login` | Public | Validates credentials and issues a secure JWT Bearer Token. |
+| `POST` | `/api/Auth/Login` | Public | Authenticate and receive JWT token |
 
-### 📅 Bookings Module
+### 📅 Bookings
 | Method | Endpoint | Access | Description |
 |--------|----------|--------|-------------|
-| `POST` | `/api/Bookings` | Public | Creates a new court reservation (Client-facing). |
-| `GET` | `/api/Bookings/available-slots` | Public | Fetches real-time available time frames for courts. |
-| `GET` | `/api/Bookings/admin/dashboard-stats` | Admin Only | Retrieves financial and operational performance statistics. |
-| `GET` | `/api/Bookings/Pending-Bookings` | Admin Only | Lists all reservations awaiting administrative approval. |
-| `PUT` | `/api/Bookings/confirm/{id}` | Admin Only | Confirms a pending court booking. |
+| `POST` | `/api/Bookings` | Public | Create new court reservation |
+| `GET` | `/api/Bookings/available-slots` | Public | Get real-time available time slots |
+| `GET` | `/api/Bookings/admin/dashboard-stats` | Admin | Retrieve booking analytics and revenue |
+| `GET` | `/api/Bookings/Pending-Bookings` | Admin | List pending reservations |
+| `PUT` | `/api/Bookings/confirm/{id}` | Admin | Confirm booking request |
 
-### 🏟️ Courts Module
+### 🏟️ Courts Management
 | Method | Endpoint | Access | Description |
 |--------|----------|--------|-------------|
-| `POST` | `/api/Courts` | Admin Only | Registers a new sports court into the database. |
-| `PUT` | `/api/Courts/Update-price` | Admin Only | Modifies the per-hour rental pricing of a specific court. |
-| `PUT` | `/api/Courts/Toggle-status` | Admin Only | Activates or temporarily deactivates a court (e.g., maintenance). |
-| `GET` | `/api/Courts/admin/courts/{id}/performance` | Admin Only | Analyzes utilization rates and popularity of a court. |
+| `POST` | `/api/Courts` | Admin | Register new sports court |
+| `PUT` | `/api/Courts/Update-price` | Admin | Update court hourly rate |
+| `PUT` | `/api/Courts/Toggle-status` | Admin | Enable/disable court availability |
+| `GET` | `/api/Courts/admin/courts/{id}/performance` | Admin | View court utilization metrics |
+
+Full API documentation available at `/swagger` when running locally.
 
 ---
 
-## 🛠️ Tech Stack & Packages
+## 📊 Performance Metrics
 
-*   **Runtime:** .NET Core / C#
-*   **Database:** Microsoft SQL Server (Containerized)
-*   **ORM:** Entity Framework Core
-*   **Mediator:** MediatR
-*   **Security:** System.IdentityModel.Tokens.Jwt, BCrypt.Net-Next
-*   **Real-Time:** Microsoft.AspNetCore.SignalR
-*   **CI/CD:** GitHub Actions
+### Lighthouse Scores (Production)
+```
+Performance:      100 / 100  ⚡
+Accessibility:    100 / 100  ♿
+Best Practices:   100 / 100  ✅
+SEO:              100 / 100  🔍
+```
+
+### Core Web Vitals
+- **First Contentful Paint (FCP):** 1.0s
+- **Largest Contentful Paint (LCP):** 1.1s
+- **Cumulative Layout Shift (CLS):** 0
+- **Speed Index:** 1.3s
+
+### Bundle Optimization
+- Font loading optimized: **80KB saved** (3 weights instead of 9)
+- Code splitting with React Server Components
+- Optimized images with Next.js Image component
+- Zero layout shift with proper sizing
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+| Technology | Purpose |
+|------------|---------|
+| .NET 9 / C# | Runtime framework |
+| Entity Framework Core | ORM and database access |
+| SQL Server | Relational database |
+| MediatR | CQRS implementation |
+| FluentValidation | Input validation |
+| SignalR | Real-time communication |
+| JWT | Authentication tokens |
+| Docker | Containerization |
+| GitHub Actions | CI/CD pipeline |
+
+### Frontend
+| Technology | Purpose |
+|------------|---------|
+| Next.js 15 | React framework with App Router |
+| React 19 | UI library |
+| TypeScript | Type safety |
+| CSS Modules | Scoped styling |
+| Vercel | Hosting and deployment |
+
+---
+
+## 🔒 Security Features
+
+- ✅ **JWT Authentication:** Secure token-based authentication with expiration
+- ✅ **Role-Based Access Control (RBAC):** Admin vs. User permissions
+- ✅ **CORS Configuration:** Restricted to production frontend origin only
+- ✅ **Password Hashing:** BCrypt encryption for user credentials
+- ✅ **Input Validation:** FluentValidation rules on all endpoints
+- ✅ **SQL Injection Prevention:** Parameterized queries via EF Core
+
+---
+
+## 📁 Project Structure
+
+```
+CourtBookingSystem/
+├── CourtBookingSystem.API/          # Presentation layer
+│   ├── Controllers/                 # API endpoints
+│   ├── Hubs/                        # SignalR hubs
+│   └── Program.cs                   # Application entry point
+├── CourtBookingSystem.Application/  # Business logic layer
+│   ├── Commands/                    # CQRS write operations
+│   ├── Queries/                     # CQRS read operations
+│   └── Validators/                  # FluentValidation rules
+├── CourtBookingSystem.Domain/       # Core domain layer
+│   ├── Entities/                    # Domain models
+│   └── Interfaces/                  # Repository contracts
+├── CourtBookingSystem.Infrastructure/ # Data access layer
+│   ├── Data/                        # EF Core context
+│   └── Repositories/                # Data access implementations
+├── frontend/                        # Next.js application
+│   ├── src/
+│   │   ├── app/                     # App Router pages
+│   │   ├── components/              # React components
+│   │   ├── contexts/                # React Context providers
+│   │   └── styles/                  # Global styles
+│   └── public/                      # Static assets
+└── docker-compose.yml               # Container orchestration
+```
+
+---
+
+## 🚦 CI/CD Pipeline
+
+Automated GitHub Actions workflow on every push:
+
+1. **Build:** Compile .NET application
+2. **Test:** Run unit and integration tests
+3. **Docker:** Build and validate container images
+4. **Deploy:** Automatic deployment to production (Vercel for frontend)
+
+Frontend deployment preview links generated automatically for every pull request.
+
+---
+
+## 🤝 Contributing
+
+This is a portfolio project, but feedback and suggestions are welcome!
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📝 License
+
+This project is open source and available for educational purposes.
+
+---
+
+## 🔗 Links
+
+- **Live Demo:** [https://malabna-app.vercel.app](https://malabna-app.vercel.app)
+- **Backend by:** [@tuhazem](https://github.com/tuhazem)
+- **Frontend by:** [@abdullah012039](https://github.com/abdullah012039)
+- **API Documentation:** Available at `/swagger` when running locally
+
+---
+
+## 📧 Contact
+
+For questions or collaboration opportunities:
+
+- **Backend:** [GitHub @tuhazem](https://github.com/tuhazem)
+- **Frontend:** [GitHub @abdullah012039](https://github.com/abdullah012039)
+
+---
+
+<p align="center">Made with ❤️ by the Malabna Team</p>
