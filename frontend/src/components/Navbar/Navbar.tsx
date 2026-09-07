@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -7,6 +8,15 @@ import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Only apply active class after hydration to avoid SSR/client mismatch
+  const isActive = (href: string) =>
+    mounted && (href === '/' ? pathname === '/' : pathname === href);
 
   return (
     <header className={`${styles.header} hidden md:flex`}>
@@ -37,25 +47,25 @@ export default function Navbar() {
         <nav className={styles.navLinks} aria-label="التنقل الرئيسي">
           <Link
             href="/"
-            className={`${styles.navLink} ${pathname === '/' ? styles.navLinkActive : ''}`}
+            className={`${styles.navLink} ${isActive('/') ? styles.navLinkActive : ''}`}
           >
             الملاعب
           </Link>
           <Link
             href="/about"
-            className={`${styles.navLink} ${pathname === '/about' ? styles.navLinkActive : ''}`}
+            className={`${styles.navLink} ${isActive('/about') ? styles.navLinkActive : ''}`}
           >
             عن ملعبنا
           </Link>
           <Link
             href="/support"
-            className={`${styles.navLink} ${pathname === '/support' ? styles.navLinkActive : ''}`}
+            className={`${styles.navLink} ${isActive('/support') ? styles.navLinkActive : ''}`}
           >
             الدعم
           </Link>
           <Link
             href="/partner"
-            className={`${styles.navLink} ${pathname === '/partner' ? styles.navLinkActive : ''}`}
+            className={`${styles.navLink} ${isActive('/partner') ? styles.navLinkActive : ''}`}
           >
             انضم كشريك
           </Link>

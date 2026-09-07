@@ -406,7 +406,7 @@ export default function AdminCourtsPage() {
                   <input
                     id="newPriceInput"
                     type="number"
-                    step="10"
+                    step="1"
                     min="1"
                     required
                     autoFocus
@@ -511,7 +511,7 @@ export default function AdminCourtsPage() {
                   <input
                     id="courtPriceInput"
                     type="number"
-                    step="10"
+                    step="1"
                     min="1"
                     required
                     className={styles.formInput}

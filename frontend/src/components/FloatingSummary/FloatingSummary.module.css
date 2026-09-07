@@ -3,9 +3,16 @@
   bottom: 0.75rem;
   left: 0;
   right: 0;
-  z-index: 45;
+  z-index: 60;
   padding: 0 1rem;
   pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    bottom: 0;
+    padding: 0 0.75rem calc(5rem + env(safe-area-inset-bottom)) 0.75rem;
+  }
 }
 
 .bar {
