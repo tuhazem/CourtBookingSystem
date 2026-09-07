@@ -12,7 +12,7 @@
   <a href="https://malaabna-app.vercel.app">
     <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge" alt="Live Demo"/>
   </a>
-  <img src="https://img.shields.io/badge/Performance-100%2F100-success?style=for-the-badge&logo=lighthouse" alt="Lighthouse Score"/>
+  <img src="https://img.shields.io/badge/Performance-90%2B%2F100-success?style=for-the-badge&logo=lighthouse" alt="Lighthouse Score"/>
   <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js"/>
   <img src="https://img.shields.io/badge/.NET-9-512BD4?style=for-the-badge&logo=dotnet" alt=".NET"/>
 </p>
@@ -44,7 +44,7 @@ This is a collaborative portfolio project showcasing full-stack development expe
 - ✅ Automated CI/CD with GitHub Actions
 
 **Frontend:**
-- ✅ **100/100/100/100** Lighthouse scores (Performance/Accessibility/Best Practices/SEO)
+- ✅ **Lighthouse Scores: 90+/100/100/100** (Performance/Accessibility/Best Practices/SEO)
 - ✅ Core Web Vitals: LCP 1.1s, FCP 1.0s, CLS 0
 - ✅ Next.js 15 with App Router and React Server Components
 - ✅ Optimized font loading (80KB saved)
@@ -229,23 +229,27 @@ Full API documentation available at `/swagger` when running locally.
 
 ### Lighthouse Scores (Production)
 ```
-Performance:      100 / 100  ⚡
+Performance:      90+ / 100  ⚡
 Accessibility:    100 / 100  ♿
 Best Practices:   100 / 100  ✅
 SEO:              100 / 100  🔍
 ```
 
-### Core Web Vitals
-- **First Contentful Paint (FCP):** 1.0s
-- **Largest Contentful Paint (LCP):** 1.1s
-- **Cumulative Layout Shift (CLS):** 0
-- **Speed Index:** 1.3s
+**Note:** Performance scores are measured under controlled conditions and may vary slightly based on network conditions. Consistent scores of 90+ demonstrate excellent optimization.
+
+### Core Web Vitals (Excellent)
+- **First Contentful Paint (FCP):** 1.0s ⚡ (Good)
+- **Largest Contentful Paint (LCP):** 1.1s ⚡ (Good)
+- **Cumulative Layout Shift (CLS):** 0 ✅ (Perfect)
+- **Speed Index:** 1.3s ⚡ (Fast)
+- **Total Blocking Time (TBT):** < 200ms ⚡ (Good)
 
 ### Bundle Optimization
 - Font loading optimized: **80KB saved** (3 weights instead of 9)
 - Code splitting with React Server Components
 - Optimized images with Next.js Image component
 - Zero layout shift with proper sizing
+- DNS prefetch and resource hints optimization
 
 ---
 
