@@ -36,23 +36,6 @@ Malabna is an enterprise-grade booking system for sports facilities, designed to
 
 ---
 
-## 📸 Screenshots
-
-### Frontend Experience
-*Beautiful, responsive UI optimized for all devices*
-
-<p align="center">
-  <img src="frontend/docs/screenshots/home-page.png" width="45%" alt="Home Page" />
-  <img src="frontend/docs/screenshots/booking-modal.png" width="45%" alt="Booking Modal" />
-</p>
-
-<p align="center">
-  <img src="frontend/docs/screenshots/my-bookings.png" width="45%" alt="My Bookings" />
-  <img src="frontend/docs/screenshots/mobile-view.png" width="30%" alt="Mobile Responsive" />
-</p>
-
----
-
 ## 🏗️ Architecture & Technical Stack
 
 ### Backend Architecture (.NET 9)
