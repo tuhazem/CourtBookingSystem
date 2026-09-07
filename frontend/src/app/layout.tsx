@@ -46,6 +46,9 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
+        {/* DNS Prefetch for better performance */}
+        <link rel="dns-prefetch" href="https://malaabna-app.vercel.app" />
+        
         {/* Speculation Rules — prerender court detail pages on moderate hover intent */}
         <script
           type="speculationrules"

@@ -34,6 +34,19 @@ const nextConfig: NextConfig = {
       transform: '@fontsource/material-symbols-outlined/{{member}}',
     },
   },
+
+  // Optimize preload strategy to avoid unused preload warnings
+  headers: async () => [
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'X-DNS-Prefetch-Control',
+          value: 'on',
+        },
+      ],
+    },
+  ],
 };
 
 export default withBundleAnalyzer(nextConfig);
