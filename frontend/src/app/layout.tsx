@@ -46,6 +46,17 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
+        {/* PWA manifest & theme */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#047857" />
+        <meta name="mobile-web-app-capable" content="yes" />
+
+        {/* Apple PWA support */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="ملعبنا" />
+        <link rel="apple-touch-icon" href="/images/icon-192.png" />
+
         {/* DNS Prefetch for better performance */}
         <link rel="dns-prefetch" href="https://malaabna-app.vercel.app" />
         
@@ -61,6 +72,19 @@ export default function RootLayout({
                 },
               ],
             }),
+          }}
+        />
+
+        {/* Service Worker registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
           }}
         />
       </head>
