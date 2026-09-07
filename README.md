@@ -32,7 +32,7 @@ This is a collaborative portfolio project showcasing full-stack development expe
 
 ## 🎯 Project Overview
 
-**Malaabna** (ملاعبنا - "Our Playgrounds") is an enterprise-grade booking system for sports facilities, designed to handle high-traffic scenarios with real-time updates and optimized performance. The platform combines a robust .NET backend following Clean Architecture principles with a lightning-fast Next.js frontend achieving perfect Lighthouse scores.
+**Malaabna** (ملعبنا - "Our Playgrounds") is an enterprise-grade booking system for sports facilities, designed to handle high-traffic scenarios with real-time updates and optimized performance. The platform combines a robust .NET backend following Clean Architecture principles with a lightning-fast Next.js frontend achieving perfect Lighthouse scores.
 
 ### Key Achievements
 
