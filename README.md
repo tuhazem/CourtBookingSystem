@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>ملاعبنا - منصة حجز الملاعب الرياضية</strong>
+  <strong>ملعبنا - منصة حجز الملاعب الرياضية</strong>
 </p>
 
 <p align="center">
