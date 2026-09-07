@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   experimental: {
     // Remove legacy browser polyfills (IE11, old Safari, etc.)
     optimizePackageImports: ['framer-motion'],
+    // Enable optimized CSS loading
+    optimizeCss: true,
   },
 
   // Compiler optimizations
@@ -23,6 +25,7 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000, // 1 year cache for optimized images
   },
 
   // Production optimizations (swcMinify is enabled by default in Next.js 16)
@@ -47,6 +50,10 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
+
+  // Enable production optimizations
+  poweredByHeader: false, // Remove X-Powered-By header
+  compress: true, // Enable gzip compression
 };
 
 export default withBundleAnalyzer(nextConfig);
