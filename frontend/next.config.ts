@@ -10,8 +10,9 @@ const nextConfig: NextConfig = {
   experimental: {
     // Remove legacy browser polyfills (IE11, old Safari, etc.)
     optimizePackageImports: ['framer-motion'],
-    // Enable optimized CSS loading
-    optimizeCss: true,
+    // Note: optimizeCss disabled due to Next.js 16.x bug causing excessive preload warnings
+    // The warnings don't affect functionality but clutter console with false positives
+    // Re-enable when Next.js fixes the preload strategy in future versions
   },
 
   // Compiler optimizations

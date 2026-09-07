@@ -49,25 +49,6 @@ export default function RootLayout({
         {/* DNS Prefetch for better performance */}
         <link rel="dns-prefetch" href="https://malaabna-app.vercel.app" />
         
-        {/* Suppress preload warnings (Next.js internal optimization) */}
-        {process.env.NODE_ENV === 'production' && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function() {
-                  const originalWarn = console.warn;
-                  console.warn = function(...args) {
-                    if (args[0] && typeof args[0] === 'string' && args[0].includes('was preloaded using link preload but not used')) {
-                      return;
-                    }
-                    originalWarn.apply(console, args);
-                  };
-                })();
-              `,
-            }}
-          />
-        )}
-        
         {/* Speculation Rules — prerender court detail pages on moderate hover intent */}
         <script
           type="speculationrules"
