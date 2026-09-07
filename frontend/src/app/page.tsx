@@ -46,17 +46,24 @@ function CourtsSkeletonFallback() {
   );
 }
 
-export default async function HomePage() {
-  const initialCourts = await getCourts();
+/**
+ * Separate async component for courts data fetching
+ * Allows Hero to render immediately while courts stream in
+ */
+async function CourtsData() {
+  const courts = await getCourts();
+  return <CourtsSection initialCourts={courts} />;
+}
 
+export default function HomePage() {
   return (
     <main className={styles.main}>
-      {/* Hero Showcase Banner */}
+      {/* Hero Showcase Banner — renders immediately, no data dependency */}
       <HeroBanner />
 
-      {/* Courts Section with filter interactivity — data pre-fetched server-side */}
+      {/* Courts Section — streamed independently with Suspense boundary */}
       <Suspense fallback={<CourtsSkeletonFallback />}>
-        <CourtsSection initialCourts={initialCourts} />
+        <CourtsData />
       </Suspense>
     </main>
   );

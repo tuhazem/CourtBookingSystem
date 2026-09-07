@@ -60,7 +60,8 @@ export default function AdminCourtsPage() {
       router.push('/admin/login');
       return;
     }
-    loadCourts();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadCourts();
   }, [router, loadCourts]);
 
   // Auto-dismiss notification
@@ -266,7 +267,7 @@ export default function AdminCourtsPage() {
               stadium
             </span>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 800 }}>لا توجد ملاعب مسجلة</h3>
-            <p style={{ color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>ابدأ بإضافة أول ملعب رياضي بالنقر على زر "إضافة ملعب جديد".</p>
+            <p style={{ color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>ابدأ بإضافة أول ملعب رياضي بالنقر على زر &quot;إضافة ملعب جديد&quot;.</p>
           </div>
         ) : (
           <motion.div

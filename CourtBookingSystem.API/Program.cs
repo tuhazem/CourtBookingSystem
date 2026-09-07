@@ -66,9 +66,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.AllowAnyOrigin()  
+        policy.WithOrigins("https://malabna-app.vercel.app")
               .AllowAnyHeader()   
-              .AllowAnyMethod();  
+              .AllowAnyMethod()
+              .AllowCredentials();  
     });
 });
 

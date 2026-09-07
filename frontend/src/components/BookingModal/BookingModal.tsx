@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CourtDto, SlotDto } from '@/lib/types';
 import { createBooking } from '@/lib/api';
@@ -141,7 +142,14 @@ export default function BookingModal({
                 animate={{ scale: [0, 1.15, 1], rotate: 0 }}
                 transition={{ type: 'spring', stiffness: 450, damping: 16 }}
               >
-                <img src="/images/logo.png" alt="شعار ملعبنا" className={styles.modalLogoImg} />
+                <Image 
+                  src="/images/logo.png" 
+                  alt="شعار ملعبنا" 
+                  className={styles.modalLogoImg}
+                  width={80}
+                  height={80}
+                  priority
+                />
               </motion.div>
 
               <h2 className={styles.successTitle}>تم استلام وتأكيد طلب الحجز</h2>

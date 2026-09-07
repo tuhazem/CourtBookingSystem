@@ -2,11 +2,13 @@
   margin-top: auto;
   background-color: #ffffff;
   border-top: 1px solid var(--color-border);
-  padding: 2.5rem 0 5rem 0;
+  padding: 2.5rem 0;
+  display: none;
 }
 
 @media (min-width: 768px) {
   .footer {
+    display: block;
     padding: 2.5rem 0;
   }
 }
@@ -52,7 +54,7 @@
 
 .copyright {
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-secondary);
 }
 
@@ -61,7 +63,7 @@
   align-items: center;
   gap: 1rem;
   font-size: 0.8125rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-muted);
 }
 

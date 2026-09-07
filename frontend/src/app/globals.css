@@ -1,5 +1,6 @@
-/* Fonts are loaded via next/font/google in layout.tsx — no @import needed */
+/* Self-hosted fonts loaded via @fontsource in layout.tsx */
 
+/* Font display optimization - swap is already handled by Fontsource */
 :root {
   /* Brand Colors - Pitch Green */
   --color-primary-dark: #005228;
@@ -37,10 +38,14 @@
   --color-error: #ba1a1a;
   --color-error-soft: #fee2e2;
 
-  /* Font Families — CSS variables set by next/font on <html> element */
-  --font-cairo: var(--font-cairo, 'Cairo', system-ui, -apple-system, sans-serif);
-  --font-chivo: var(--font-chivo, 'Chivo', system-ui, sans-serif);
-  --font-hanken: 'Hanken Grotesk', system-ui, sans-serif;
+  /* Font Families — Optimized for performance */
+  --font-cairo: 'Cairo', system-ui, -apple-system, sans-serif;
+  --font-chivo: 'Chivo', system-ui, sans-serif;
+  
+  /* Font weights mapping - use only loaded weights */
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+  --font-weight-black: 900;
 
   /* Border Radii */
   --radius-sm: 0.5rem;
@@ -75,11 +80,18 @@ body {
   overflow-x: hidden;
   background-color: var(--color-canvas);
   color: var(--color-text-primary);
-  font-family: var(--font-cairo);
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
   direction: rtl;
   text-align: right;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile: prevent content overlap with bottom nav */
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 88px;
+  }
 }
 
 a {
@@ -119,7 +131,7 @@ input, textarea {
 
 /* Special number styling with sporty font */
 .num-font {
-  font-family: var(--font-chivo);
+  font-family: 'Chivo', system-ui, sans-serif;
 }
 
 /* Diagonal stripes pattern for booked slots */

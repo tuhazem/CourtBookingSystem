@@ -1,0 +1,9 @@
+# Modern browsers only - reduces polyfill bundle size
+# This targets browsers with >0.2% market share that support ES6+ natively
+
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+not IE 11
+not dead

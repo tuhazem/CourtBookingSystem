@@ -25,16 +25,20 @@ export default function CourtCard({ court }: CourtCardProps) {
         y: -6,
         transition: { type: 'spring', stiffness: 350, damping: 20 },
       }}
+      style={{ willChange: 'transform, opacity' }}
       className={styles.card}
     >
       {/* Visual Pitch Header */}
       <div className={styles.mediaHeader}>
-        {/* SVG Football Field Illustration */}
+        {/* SVG Football Field Illustration — optimized for performance */}
         <svg
           className={styles.pitchIllustration}
           viewBox="0 0 400 220"
           preserveAspectRatio="xMidYMid slice"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          role="img"
+          style={{ willChange: 'auto' }}
         >
           <defs>
             <linearGradient id={`grass-${court.id}`} x1="0%" y1="0%" x2="100%" y2="100%">

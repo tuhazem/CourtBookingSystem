@@ -79,7 +79,7 @@
 .tagline {
   font-size: 0.75rem;
   color: var(--color-primary-emerald);
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 0.125rem;
 }
 
@@ -104,7 +104,7 @@
   padding: 0.5rem 1.125rem;
   border-radius: var(--radius-full);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-muted);
   transition: all var(--transition-fast);
 }
@@ -118,6 +118,11 @@
   background-color: var(--color-primary);
   color: #ffffff !important;
   box-shadow: 0 2px 8px rgba(0, 109, 55, 0.25);
+}
+
+.navLinkActive:hover {
+  background-color: var(--color-primary-dark);
+  color: #ffffff !important;
 }
 
 .supportBtn {

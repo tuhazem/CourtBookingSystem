@@ -8,8 +8,8 @@ import styles from './page.module.css';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('Admin@123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -75,9 +75,10 @@ export default function AdminLoginPage() {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin"
+                placeholder="أدخل اسم المستخدم"
                 className={styles.input}
                 disabled={loading}
+                autoComplete="username"
               />
             </div>
           </div>
@@ -94,9 +95,10 @@ export default function AdminLoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="أدخل كلمة المرور"
                 className={styles.input}
                 disabled={loading}
+                autoComplete="current-password"
               />
             </div>
           </div>
@@ -113,12 +115,11 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <div className={styles.hintNote}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.1rem', color: 'var(--color-primary)' }}>
-            info
+        <div className={styles.securityNote}>
+          <span className="material-symbols-outlined" style={{ fontSize: '1.1rem', color: '#dc2626' }}>
+            security
           </span>
-          <span>الحساب الافتراضي للنظام:</span>
-          <strong dir="ltr">admin / Admin@123</strong>
+          <span>صفحة محمية - الوصول مقتصر على المشرفين المعتمدين فقط</span>
         </div>
       </div>
     </div>

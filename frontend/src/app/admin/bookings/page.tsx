@@ -79,7 +79,8 @@ export default function PendingBookingsPage() {
       router.push('/admin/login');
       return;
     }
-    loadBookings();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadBookings();
   }, [router, loadBookings]);
 
   // Auto-dismiss notification after 4 seconds

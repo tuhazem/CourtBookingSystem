@@ -9,7 +9,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} hidden md:flex`}>
       <div className={styles.container}>
         {/* Brand Logo & Name */}
         <Link href="/" className={styles.brand}>

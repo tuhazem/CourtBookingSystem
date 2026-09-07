@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Lighthouse reports
+*.html
+!public/**/*.html
+
+# Documentation & AI-related files
+CLAUDE.md
+AGENTS.md
+BUILD_INSTRUCTIONS.md
+OPTIMIZATION_SUMMARY.md
+PERFORMANCE.md
+
+# Temporary folders
+screen shot temp/

@@ -1,0 +1,34 @@
+# Vercel build optimization - ignore unnecessary files
+
+# Testing
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+__tests__
+__mocks__
+coverage
+
+# Documentation
+*.md
+!README.md
+docs
+
+# Development
+.vscode
+.idea
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Source maps (optional - remove if needed for debugging)
+# **/*.map
+
+# Storybook
+.storybook
+stories
+
+# Misc
+.DS_Store
+Thumbs.db

@@ -51,7 +51,7 @@ The easiest way for Frontend developers or reviewers to run the entire backend i
 ## 🔒 Security, Authentication & Frontend Integration
 
 *   **Authentication:** Strictly implements Role-Based Access Control (RBAC) powered by JWT Bearer Tokens.
-*   **CORS Enabled:** Cross-Origin Resource Sharing is completely enabled globally (AllowAnyOrigin, AllowAnyHeader, AllowAnyMethod) making it instantly ready to integrate with any frontend client (Angular, React, Vue) running on local host ports (e.g., localhost:4200 or 3000).
+*   **CORS Configuration:** Configured to allow requests from the production frontend (`https://malabna-app.vercel.app`) with credentials support for secure cross-origin communication.
 
 ---
 

@@ -13,15 +13,40 @@ interface CourtsSectionProps {
 }
 
 /**
- * Client Component: handles filter interactivity.
+ * Client Component: handles filter and sort interactivity.
  * Receives pre-fetched courts from the Server Component — no useEffect fetch needed.
  */
 export default function CourtsSection({ initialCourts }: CourtsSectionProps) {
   const [selectedType, setSelectedType] = useState<CourtType | 'ALL'>('ALL');
+  const [sortBy, setSortBy] = useState<'name' | 'newest' | 'price-low' | 'price-high'>('name');
 
   const filteredCourts = initialCourts.filter((court) => {
     if (selectedType === 'ALL') return true;
     return court.type === selectedType;
+  });
+
+  // Sort courts based on selected criteria
+  const sortedCourts = [...filteredCourts].sort((a, b) => {
+    switch (sortBy) {
+      case 'name':
+        // Alphabetical by name (Arabic)
+        return a.name.localeCompare(b.name, 'ar');
+      
+      case 'newest':
+        // Newest first (highest ID)
+        return b.id - a.id;
+      
+      case 'price-low':
+        // Lowest price first
+        return a.pricePerHour - b.pricePerHour;
+      
+      case 'price-high':
+        // Highest price first
+        return b.pricePerHour - a.pricePerHour;
+      
+      default:
+        return 0;
+    }
   });
 
   const khomasyCount = initialCourts.filter((c) => c.type === CourtType.Khomasy).length;
@@ -58,15 +83,34 @@ export default function CourtsSection({ initialCourts }: CourtsSectionProps) {
         </div>
 
         <div className={styles.sortNote}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.125rem', color: 'var(--color-primary)' }}>
-            tune
-          </span>
-          <span>عرض حسب: المتاح والأحدث</span>
+          <button
+            type="button"
+            className={styles.sortToggle}
+            onClick={() => {
+              const options: Array<'name' | 'newest' | 'price-low' | 'price-high'> = 
+                ['name', 'newest', 'price-low', 'price-high'];
+              const currentIndex = options.indexOf(sortBy);
+              const nextIndex = (currentIndex + 1) % options.length;
+              setSortBy(options[nextIndex]);
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>
+              tune
+            </span>
+            <span>
+              عرض حسب: {
+                sortBy === 'name' ? 'الاسم' :
+                sortBy === 'newest' ? 'الأحدث' :
+                sortBy === 'price-low' ? 'الأرخص' :
+                'الأغلى'
+              }
+            </span>
+          </button>
         </div>
       </section>
 
       {/* Courts Grid — Animated with Framer Motion */}
-      {filteredCourts.length === 0 ? (
+      {sortedCourts.length === 0 ? (
         <div className={styles.emptyState}>
           <p>لا توجد ملاعب مطابقة للتصنيف المختار حالياً.</p>
         </div>
@@ -78,7 +122,7 @@ export default function CourtsSection({ initialCourts }: CourtsSectionProps) {
           className={styles.grid}
         >
           <AnimatePresence mode="popLayout">
-            {filteredCourts.map((court) => (
+            {sortedCourts.map((court) => (
               <CourtCard key={court.id} court={court} />
             ))}
           </AnimatePresence>

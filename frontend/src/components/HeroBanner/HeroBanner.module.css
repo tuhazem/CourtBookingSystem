@@ -9,6 +9,15 @@
   box-shadow: 0 16px 36px rgba(0, 82, 40, 0.18);
 }
 
+@media (max-width: 767px) {
+  .heroSection {
+    padding: 1.5rem 1.25rem;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+}
+
 @media (min-width: 640px) {
   .heroSection {
     padding: 3rem 2.5rem;
@@ -23,8 +32,12 @@
   height: 16rem;
   border-radius: var(--radius-full);
   background-color: rgba(46, 204, 113, 0.2);
+  /* Blur on small decorative elements is acceptable, but keep it <=48px */
   filter: blur(48px);
   pointer-events: none;
+  /* Promote to own layer - this animates via Framer Motion opacity only */
+  will-change: opacity;
+  contain: strict;
 }
 
 .glowBall2 {
@@ -35,8 +48,12 @@
   height: 14rem;
   border-radius: var(--radius-full);
   background-color: rgba(16, 185, 129, 0.18);
+  /* Blur on small decorative elements is acceptable, but keep it <=48px */
   filter: blur(40px);
   pointer-events: none;
+  /* Promote to own layer - this animates via Framer Motion opacity only */
+  will-change: opacity;
+  contain: strict;
 }
 
 .heroWatermark {
@@ -81,8 +98,12 @@
   font-size: 0.8125rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  /* Reduced blur for better performance - 8px is acceptable for small elements */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  /* Promote to own layer for compositor optimization */
+  will-change: transform, opacity;
+  contain: paint layout;
 }
 
 .liveDot {
@@ -101,6 +122,12 @@
   letter-spacing: -0.01em;
 }
 
+@media (max-width: 767px) {
+  .title {
+    font-size: 1.75rem;
+  }
+}
+
 @media (min-width: 640px) {
   .title {
     font-size: 2.75rem;
@@ -111,8 +138,15 @@
   font-size: 1rem;
   line-height: 1.65;
   color: rgba(232, 248, 239, 0.95);
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .subtitle {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
 }
 
 @media (min-width: 640px) {
@@ -134,10 +168,14 @@
   gap: 0.5rem;
   font-size: 0.8125rem;
   background-color: rgba(255, 255, 255, 0.12);
+  /* Reduced blur for better performance - 8px is acceptable for small elements */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 0.5rem 0.875rem;
   border-radius: var(--radius-md);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  font-weight: 600;
+  font-weight: 700;
+  /* Optimize for transform animations */
+  will-change: transform;
+  contain: paint layout;
 }

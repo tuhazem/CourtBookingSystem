@@ -2,23 +2,32 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   getCustomerBookings,
   removeCustomerBooking,
   SavedCustomerBooking,
 } from '@/lib/customerBookings';
+import PageBadge from '@/components/PageBadge/PageBadge';
 import styles from './my-bookings.module.css';
 
+
 export default function MyBookingsPage() {
-  const [bookings, setBookings] = useState<SavedCustomerBooking[]>([]);
+  const [hasMounted, setHasMounted] = useState(false);
+  // Initialize bookings directly from localStorage (no setState in effect)
+  const [bookings, setBookings] = useState<SavedCustomerBooking[]>(() => {
+    if (typeof window !== 'undefined') {
+      return getCustomerBookings();
+    }
+    return [];
+  });
   const [searchTerm, setSearchTerm] = useState('');
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasMounted(true);
-    setBookings(getCustomerBookings());
   }, []);
 
   const handleCopyCode = (id: string) => {
@@ -57,12 +66,7 @@ export default function MyBookingsPage() {
   return (
     <main className={styles.pageContainer}>
       <header className={styles.header}>
-        <div className={styles.badge}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>
-            confirmation_number
-          </span>
-          <span>بوابة استعلام الحجوزات</span>
-        </div>
+        <PageBadge icon="confirmation_number" text="بوابة استعلام الحجوزات" />
         <h1 className={styles.title}>حجوزاتي ومبارياتي</h1>
         <p className={styles.subtitle}>
           تابع حالة حجوزاتك، تفاصيل الماتش القادم، وشارك الدعوة مع فريقك عبر الواتساب بضغطة واحدة.
@@ -121,7 +125,13 @@ export default function MyBookingsPage() {
                   <div className={styles.cardHeader}>
                     <div className={styles.courtInfo}>
                       <div className={styles.courtBadge}>
-                        <img src="/images/logo.png" alt="شعار ملعبنا" className={styles.courtBadgeLogo} />
+                        <Image 
+                          src="/images/logo.png" 
+                          alt="شعار ملعبنا" 
+                          className={styles.courtBadgeLogo}
+                          width={40}
+                          height={40}
+                        />
                       </div>
                       <div>
                         <h2 className={styles.courtName}>{b.courtName}</h2>
@@ -132,27 +142,27 @@ export default function MyBookingsPage() {
                       </div>
                     </div>
 
-                    <div>
+                    <div className={styles.statusRow}>
                       {b.status === 'Confirmed' ? (
                         <span className={styles.statusConfirmed}>
-                          <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
+                          <span className="material-symbols-outlined" style={{ fontSize: '0.9rem' }}>
                             check_circle
                           </span>
-                          <span>مؤكد ومحجوز</span>
+                          <span>مؤكد</span>
                         </span>
                       ) : b.status === 'Cancelled' ? (
                         <span className={styles.statusCancelled}>
-                          <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
+                          <span className="material-symbols-outlined" style={{ fontSize: '0.9rem' }}>
                             cancel
                           </span>
                           <span>ملغي</span>
                         </span>
                       ) : (
                         <span className={styles.statusPending}>
-                          <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
+                          <span className="material-symbols-outlined" style={{ fontSize: '0.9rem' }}>
                             hourglass_top
                           </span>
-                          <span>بانتظار اعتماد الإدارة</span>
+                          <span>قيد الانتظار</span>
                         </span>
                       )}
                     </div>
@@ -161,50 +171,50 @@ export default function MyBookingsPage() {
                   <div className={styles.cardDetails}>
                     <div className={styles.detailItem}>
                       <span className={styles.detailLabel}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--color-primary)' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '0.875rem' }}>
                           calendar_month
                         </span>
-                        <span>تاريخ الماتش</span>
+                        <span>التاريخ</span>
                       </span>
                       <span className={styles.detailValue}>{b.bookingDate}</span>
                     </div>
 
                     <div className={styles.detailItem}>
                       <span className={styles.detailLabel}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--color-primary)' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '0.875rem' }}>
                           schedule
                         </span>
-                        <span>توقيت الحجز</span>
+                        <span>الوقت</span>
                       </span>
                       <span className={styles.detailValue}>{b.timeLabel}</span>
                     </div>
 
                     <div className={styles.detailItem}>
                       <span className={styles.detailLabel}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--color-primary)' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '0.875rem' }}>
                           person
                         </span>
-                        <span>كابتن الحجز</span>
+                        <span>الكابتن</span>
                       </span>
                       <span className={styles.detailValue}>{b.customerName}</span>
                     </div>
 
                     <div className={styles.detailItem}>
                       <span className={styles.detailLabel}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--color-primary)' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '0.875rem' }}>
                           phone_iphone
                         </span>
-                        <span>رقم الهاتف</span>
+                        <span>الهاتف</span>
                       </span>
                       <span className={styles.detailValue} dir="ltr">{b.customerPhone}</span>
                     </div>
 
                     <div className={styles.detailItem}>
                       <span className={styles.detailLabel}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--color-primary)' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '0.875rem' }}>
                           payments
                         </span>
-                        <span>العربون المطلوب</span>
+                        <span>العربون</span>
                       </span>
                       <span className={styles.detailValue} style={{ color: 'var(--color-primary)' }}>
                         {deposit} ج.م
@@ -213,10 +223,10 @@ export default function MyBookingsPage() {
 
                     <div className={styles.detailItem}>
                       <span className={styles.detailLabel}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '1rem', color: 'var(--color-primary)' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '0.875rem' }}>
                           account_balance_wallet
                         </span>
-                        <span>المتبقي بالملعب</span>
+                        <span>المتبقي</span>
                       </span>
                       <span className={styles.detailValue}>{remaining} ج.م</span>
                     </div>
@@ -230,10 +240,10 @@ export default function MyBookingsPage() {
                         rel="noopener noreferrer"
                         className={styles.whatsappShareBtn}
                       >
-                        <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
                           share
                         </span>
-                        <span>مشاركة تفاصيل الماتش واتساب</span>
+                        <span>مشاركة</span>
                       </a>
 
                       <button
@@ -241,10 +251,10 @@ export default function MyBookingsPage() {
                         onClick={() => handleCopyCode(b.id)}
                         className={styles.actionBtn}
                       >
-                        <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
+                        <span className="material-symbols-outlined" style={{ fontSize: '0.9rem' }}>
                           content_copy
                         </span>
-                        <span>{copiedId === b.id ? 'تم النسخ ✓' : 'نسخ الكود'}</span>
+                        <span>{copiedId === b.id ? 'تم ✓' : 'نسخ'}</span>
                       </button>
                     </div>
 
@@ -252,9 +262,9 @@ export default function MyBookingsPage() {
                       type="button"
                       onClick={() => handleRemove(b.id)}
                       className={`${styles.actionBtn} ${styles.removeBtn}`}
-                      title="إزالة هذا الحجز من القائمة المحفوظة محلياً"
+                      title="إزالة هذا الحجز"
                     >
-                      <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '0.9rem' }}>
                         delete
                       </span>
                       <span>إزالة</span>
@@ -268,7 +278,14 @@ export default function MyBookingsPage() {
       ) : (
         <div className={styles.emptyState}>
           <div className={styles.emptyIllustration}>
-            <img src="/images/logo.png" alt="ملعبنا" className={styles.emptyLogo} />
+            <Image 
+              src="/images/logo.png" 
+              alt="ملعبنا" 
+              className={styles.emptyLogo}
+              width={120}
+              height={120}
+              priority
+            />
           </div>
           <h2 className={styles.emptyTitle}>
             {searchTerm ? 'لم يتم العثور على حجوزات مطابقة' : 'لسه معندكش أي حجوزات مسجلة'}

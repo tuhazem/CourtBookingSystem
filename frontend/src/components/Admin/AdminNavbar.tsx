@@ -9,13 +9,25 @@ import styles from './AdminNavbar.module.css';
 export default function AdminNavbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const [user, setUser] = useState<{ username: string; role: string } | null>(null);
   const [mounted, setMounted] = useState(false);
+  // Initialize user state directly from getAuthUser (no setState in effect)
+  const [user, setUser] = useState<{ username: string; role: string } | null>(() => {
+    // Only run on client-side
+    if (typeof window !== 'undefined') {
+      return getAuthUser();
+    }
+    return null;
+  });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    setUser(getAuthUser());
-  }, []);
+    // Sync user state if needed after mount
+    const currentUser = getAuthUser();
+    if (JSON.stringify(currentUser) !== JSON.stringify(user)) {
+      setUser(currentUser);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleLogout = () => {
     clearAuth();

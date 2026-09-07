@@ -19,6 +19,7 @@ export default function HeroBanner() {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'opacity' }}
       />
       <motion.div
         className={styles.glowBall2}
@@ -30,6 +31,7 @@ export default function HeroBanner() {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'opacity' }}
       />
 
       {/* Branded Pitch Watermark — decorative, no priority needed */}
@@ -41,6 +43,10 @@ export default function HeroBanner() {
           className={styles.watermarkImg}
           width={120}
           height={120}
+          priority
+          quality={85}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
         />
       </div>
 
@@ -51,6 +57,7 @@ export default function HeroBanner() {
           initial={{ opacity: 0, y: -15, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={transitions.springSmooth}
+          style={{ willChange: 'transform, opacity' }}
         >
           <span className={`${styles.liveDot} animate-pulse`}></span>
           <span>حجز فوري ومؤكد 100% بدون وسيط</span>
@@ -62,6 +69,7 @@ export default function HeroBanner() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...transitions.springBouncy, delay: 0.1 }}
+          style={{ willChange: 'transform, opacity' }}
         >
           جاهز للماتش القادم؟
         </motion.h1>
@@ -72,6 +80,7 @@ export default function HeroBanner() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
+          style={{ willChange: 'transform, opacity' }}
         >
           ابحث عن أفضل ملاعب كرة القدم المعتمدة في منطقتك، واحجز موعدك فوراً بتأكيد مباشر وعربون مؤمن.
         </motion.p>
@@ -82,11 +91,13 @@ export default function HeroBanner() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
+          style={{ willChange: 'transform, opacity' }}
         >
           <motion.div
             className={styles.quickPill}
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+            style={{ willChange: 'transform' }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '1.125rem', color: '#6bfe9c' }}>
               verified
@@ -98,6 +109,7 @@ export default function HeroBanner() {
             className={styles.quickPill}
             whileHover={{ scale: 1.05 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+            style={{ willChange: 'transform' }}
           >
             <span className="material-symbols-outlined" style={{ fontSize: '1.125rem', color: '#6bfe9c' }}>
               schedule

@@ -19,11 +19,15 @@ export default function CustomerMobileNav() {
         href="/"
         className={`${styles.tabItem} ${pathname === '/' ? styles.tabItemActive : ''}`}
       >
-        <motion.span whileTap={{ scale: 0.85 }} className={styles.tabIcon}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.375rem' }}>
+        <motion.div 
+          whileTap={{ scale: 0.9 }} 
+          className={styles.tabIcon}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '1.75rem' }}>
             sports_soccer
           </span>
-        </motion.span>
+        </motion.div>
         <span>الملاعب</span>
       </Link>
 
@@ -31,11 +35,15 @@ export default function CustomerMobileNav() {
         href="/my-bookings"
         className={`${styles.tabItem} ${pathname === '/my-bookings' ? styles.tabItemActive : ''}`}
       >
-        <motion.span whileTap={{ scale: 0.85 }} className={styles.tabIcon}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.375rem' }}>
+        <motion.div 
+          whileTap={{ scale: 0.9 }} 
+          className={styles.tabIcon}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '1.75rem' }}>
             confirmation_number
           </span>
-        </motion.span>
+        </motion.div>
         <span>حجوزاتي</span>
       </Link>
 
@@ -43,11 +51,15 @@ export default function CustomerMobileNav() {
         href="/about"
         className={`${styles.tabItem} ${pathname === '/about' ? styles.tabItemActive : ''}`}
       >
-        <motion.span whileTap={{ scale: 0.85 }} className={styles.tabIcon}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.375rem' }}>
+        <motion.div 
+          whileTap={{ scale: 0.9 }} 
+          className={styles.tabIcon}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '1.75rem' }}>
             info
           </span>
-        </motion.span>
+        </motion.div>
         <span>عن ملعبنا</span>
       </Link>
 
@@ -55,24 +67,16 @@ export default function CustomerMobileNav() {
         href="/support"
         className={`${styles.tabItem} ${pathname === '/support' ? styles.tabItemActive : ''}`}
       >
-        <motion.span whileTap={{ scale: 0.85 }} className={styles.tabIcon}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.375rem' }}>
+        <motion.div 
+          whileTap={{ scale: 0.9 }} 
+          className={styles.tabIcon}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <span className="material-symbols-outlined" style={{ fontSize: '1.75rem' }}>
             support_agent
           </span>
-        </motion.span>
+        </motion.div>
         <span>الدعم</span>
-      </Link>
-
-      <Link
-        href="/admin"
-        className={`${styles.tabItem} ${pathname === '/admin' ? styles.tabItemActive : ''}`}
-      >
-        <motion.span whileTap={{ scale: 0.85 }} className={styles.tabIcon}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.375rem' }}>
-            settings
-          </span>
-        </motion.span>
-        <span>الإدارة</span>
       </Link>
     </nav>
   );

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PageBadge from '@/components/PageBadge/PageBadge';
 import styles from './about.module.css';
 
 export const metadata = {
@@ -41,12 +42,7 @@ export default function AboutPage() {
     <main className={styles.aboutContainer}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.badge}>
-          <span className="material-symbols-outlined" style={{ fontSize: '1.125rem' }}>
-            sports_soccer
-          </span>
-          <span>قصة منصة ملعبنا</span>
-        </div>
+        <PageBadge icon="sports_soccer" text="قصة منصة ملعبنا" />
         <h1 className={styles.heroTitle}>
           من أول تجميعة حجز <br />
           <span className={styles.heroTitleHighlight}>لحد صافرة النهاية</span>

@@ -10,20 +10,6 @@
   margin-bottom: 4rem;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 1rem;
-  border-radius: var(--radius-full);
-  background: var(--color-primary-light);
-  border: 1px solid var(--color-border-medium);
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 1.25rem;
-}
-
 .heroTitle {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 900;
@@ -145,12 +131,13 @@
   width: 50px;
   height: 50px;
   border-radius: var(--radius-lg);
-  background: var(--color-primary-light);
-  color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary-soft) 0%, rgba(232, 248, 239, 0.6) 100%);
+  color: var(--color-primary-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
+  box-shadow: 0 2px 8px rgba(0, 109, 55, 0.12);
 }
 
 .pillarTitle {
@@ -193,7 +180,7 @@
 .statLabel {
   font-size: 0.9375rem;
   color: #dcfce7;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .ctaBox {

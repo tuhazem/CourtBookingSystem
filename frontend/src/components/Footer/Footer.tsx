@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -7,7 +8,13 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.brandSide}>
           <div className={styles.logoBadge}>
-            <img src="/images/logo.png" alt="ملعبنا" className={styles.footerLogoImg} />
+            <Image 
+              src="/images/logo.png" 
+              alt="ملعبنا" 
+              className={styles.footerLogoImg}
+              width={32}
+              height={32}
+            />
           </div>
           <p className={styles.copyright}>
             ملعبنا © 2026 • حجز ملاعب كرة القدم المعتمدة
