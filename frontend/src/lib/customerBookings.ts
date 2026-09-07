@@ -14,7 +14,7 @@ export interface SavedCustomerBooking {
   status: 'Pending' | 'Confirmed' | 'Cancelled';
 }
 
-const STORAGE_KEY = 'malabna_customer_bookings';
+const STORAGE_KEY = 'malaabna_customer_bookings';
 
 export function getCustomerBookings(): SavedCustomerBooking[] {
   if (typeof window === 'undefined') return [];

@@ -1,7 +1,7 @@
 import { AuthLoginDto } from './types';
 
-const TOKEN_KEY = 'malabna_admin_token';
-const USER_KEY = 'malabna_admin_user';
+const TOKEN_KEY = 'malaabna_admin_token';
+const USER_KEY = 'malaabna_admin_user';
 
 export function saveAuth(auth: AuthLoginDto): void {
   if (typeof window === 'undefined') return;

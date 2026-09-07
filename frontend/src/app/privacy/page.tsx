@@ -59,7 +59,7 @@ export default function PrivacyPage() {
         <section className={styles.section}>
           <h2>5. حقوقك والتواصل معنا</h2>
           <p>
-            يحق لك في أي وقت طلب حذف بياناتك أو تعديلها من خلال التواصل مع فريق الدعم الفني عبر البريد الإلكتروني: <strong>support@malabna.app</strong> أو عبر صفحة الدعم والمساعدة.
+            يحق لك في أي وقت طلب حذف بياناتك أو تعديلها من خلال التواصل مع فريق الدعم الفني عبر البريد الإلكتروني: <strong>support@malaabna.app</strong> أو عبر صفحة الدعم والمساعدة.
           </p>
         </section>
       </article>

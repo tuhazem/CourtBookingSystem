@@ -76,14 +76,14 @@ export default function SupportPage() {
           </span>
         </a>
 
-        <a href="mailto:support@malabna.app" className={styles.channelCard}>
+        <a href="mailto:support@malaabna.app" className={styles.channelCard}>
           <div className={styles.channelIcon} style={{ background: '#fef3c7', color: '#d97706' }}>
             <span className="material-symbols-outlined">mail</span>
           </div>
           <h2 className={styles.channelTitle}>البريد الرسمي</h2>
           <p className={styles.channelDesc}>للشكاوى والاقتراحات وعقود رعاية البطولات والملاعب.</p>
           <span className={styles.channelAction}>
-            <span>support@malabna.app</span>
+            <span>support@malaabna.app</span>
             <span className="material-symbols-outlined" style={{ fontSize: '1rem' }}>
               arrow_back
             </span>

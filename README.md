@@ -1,6 +1,23 @@
-# 🏟️ Malabna - Court Booking System
+# 🏟️ Malaabna - Court Booking System
 
-> **Live Demo:** [https://malabna-app.vercel.app](https://malabna-app.vercel.app)
+<p align="center">
+  <img src="frontend/public/images/logo.png" alt="Malaabna Logo" width="200"/>
+</p>
+
+<p align="center">
+  <strong>ملاعبنا - منصة حجز الملاعب الرياضية</strong>
+</p>
+
+<p align="center">
+  <a href="https://malaabna-app.vercel.app">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen?style=for-the-badge" alt="Live Demo"/>
+  </a>
+  <img src="https://img.shields.io/badge/Performance-100%2F100-success?style=for-the-badge&logo=lighthouse" alt="Lighthouse Score"/>
+  <img src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/.NET-9-512BD4?style=for-the-badge&logo=dotnet" alt=".NET"/>
+</p>
+
+> **Live Demo:** [https://malaabna-app.vercel.app](https://malaabna-app.vercel.app)
 
 A full-stack, production-ready sports court booking platform featuring real-time availability updates, secure authentication, and an optimized user experience. This project demonstrates modern web development practices across the entire stack.
 
@@ -15,7 +32,7 @@ This is a collaborative portfolio project showcasing full-stack development expe
 
 ## 🎯 Project Overview
 
-Malabna is an enterprise-grade booking system for sports facilities, designed to handle high-traffic scenarios with real-time updates and optimized performance. The platform combines a robust .NET backend following Clean Architecture principles with a lightning-fast Next.js frontend achieving perfect Lighthouse scores.
+**Malaabna** (ملاعبنا - "Our Playgrounds") is an enterprise-grade booking system for sports facilities, designed to handle high-traffic scenarios with real-time updates and optimized performance. The platform combines a robust .NET backend following Clean Architecture principles with a lightning-fast Next.js frontend achieving perfect Lighthouse scores.
 
 ### Key Achievements
 
@@ -332,7 +349,7 @@ This project is open source and available for educational purposes.
 
 ## 🔗 Links
 
-- **Live Demo:** [https://malabna-app.vercel.app](https://malabna-app.vercel.app)
+- **Live Demo:** [https://malaabna-app.vercel.app](https://malaabna-app.vercel.app)
 - **Backend by:** [@tuhazem](https://github.com/tuhazem)
 - **Frontend by:** [@abdullah012039](https://github.com/abdullah012039)
 - **API Documentation:** Available at `/swagger` when running locally
@@ -348,4 +365,4 @@ For questions or collaboration opportunities:
 
 ---
 
-<p align="center">Made with ❤️ by the Malabna Team</p>
+<p align="center">Made with ❤️ by the Malaabna Team</p>

@@ -7,7 +7,7 @@ Disallow: /admin/
 Disallow: /api/
 
 # Sitemap
-Sitemap: https://malabna-app.vercel.app/sitemap.xml
+Sitemap: https://malaabna-app.vercel.app/sitemap.xml
 
 # Crawl delay (optional - set to 1 second)
 Crawl-delay: 1

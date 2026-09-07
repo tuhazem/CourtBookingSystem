@@ -15,16 +15,16 @@ import '@fontsource/chivo/900.css';
 import '@fontsource/material-symbols-outlined/400.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://malabna-app.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://malaabna-app.vercel.app'),
   title: "ملعبنا | منصة حجز ملاعب كرة القدم المعتمدة",
   description: "المنصة الأولى لحجز ملاعب كرة القدم المعتمدة في مصر. احجز ماتشك في ثواني بدون وسيط وبأفضل الأسعار.",
   keywords: ['حجز ملاعب', 'كرة قدم', 'ملاعب خماسية', 'ملاعب سباعية', 'مصر', 'رياضة'],
-  authors: [{ name: 'Malabna' }],
-  creator: 'Malabna',
+  authors: [{ name: 'Malaabna' }],
+  creator: 'Malaabna',
   openGraph: {
     title: 'ملعبنا | منصة حجز ملاعب كرة القدم',
     description: 'احجز ماتشك في ثواني بدون وسيط وبأفضل الأسعار',
-    url: 'https://malabna-app.vercel.app',
+    url: 'https://malaabna-app.vercel.app',
     siteName: 'ملعبنا',
     locale: 'ar_EG',
     type: 'website',
